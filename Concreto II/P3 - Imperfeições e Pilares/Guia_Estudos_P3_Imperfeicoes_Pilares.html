@@ -1406,15 +1406,18 @@
       </div>
 
       <div class="topic-body">
-        <!-- Conceito FCN -->
+        <!-- Conceito FCN: Começando do Zero -->
         <div class="callout callout-info" style="margin-bottom:1.1rem;">
-          <strong>🧠 Conceito Fundamental — Por que na FCN não achamos $x$ direto como em vigas?</strong><br>
-          Em uma <strong>viga</strong> (flexão simples), $N_{sd} = 0$, então existe apenas uma incógnita ($x$) e uma equação de equilíbrio ($\sum F = 0$). Já em um <strong>pilar</strong>, atuam juntos um esforço normal $N_{sd}$ e um momento $M_{sd}$, e <strong>a posição da linha neutra e a resistência dependem uma da outra</strong>. Em vez de resolver um sistema não-linear por tentativas, a apostila adota a estratégia inversa: <strong>varremos todas as posições-chave da linha neutra</strong> (os 7 limites entre os domínios de ruptura) para construir o <strong>Polígono de Segurança</strong> $(N_{Rd}, M_{Rd,t})$. Se o ponto de solicitação $(N_{sd}, M_{sd,t})$ cair dentro desse polígono, o pilar resiste!
-          <div style="margin-top:0.55rem; font-size:0.84rem; display:grid; grid-template-columns:repeat(auto-fit, minmax(210px, 1fr)); gap:0.45rem;">
-            <div style="background:rgba(255,255,255,0.75); padding:0.45rem 0.6rem; border-radius:7px; border:1px solid #bfdbfe;"><strong>Reta a &amp; Dom. 1:</strong> Tração pura/excêntrica. O concreto está todo tracionado (desprezado, $N_{Rd,c}=0$) e só o aço trabalha.</div>
-            <div style="background:rgba(255,255,255,0.75); padding:0.45rem 0.6rem; border-radius:7px; border:1px solid #bfdbfe;"><strong>Dom. 2 &amp; 3:</strong> Ruptura dúctil. Aço tracionado escoa ($\ge \varepsilon_{yd}$); em 3–4 o concreto atinge $-3{,}5\text{‰}$ junto ao escoamento do aço (máximo $M_{Rd}$!).</div>
-            <div style="background:rgba(255,255,255,0.75); padding:0.45rem 0.6rem; border-radius:7px; border:1px solid #bfdbfe;"><strong>Dom. 4 &amp; 4a:</strong> Concreto esmaga ($-3{,}5\text{‰}$) antes do aço tracionado escoar. Em 4a–5 a LN sai da seção ($x = h_n$).</div>
-            <div style="background:rgba(255,255,255,0.75); padding:0.45rem 0.6rem; border-radius:7px; border:1px solid #bfdbfe;"><strong>Dom. 5 &amp; Reta b:</strong> Toda a seção comprimida sem tração. Na Reta b (compressão uniforme), a deformação cai para $-\varepsilon_{c2} = -2{,}0\text{‰}$.</div>
+          <strong>🧠 Começando do Zero — O que é Flexão Composta Normal?</strong><br>
+          Imagine um pilar levando uma carga vertical de compressão ($N_{sd}$) que <strong>não passa exatamente no centro</strong> (centroide) da seção, mas sim deslocada de uma excentricidade $e_y$ sobre o eixo vertical $y$. Pela estática básica, uma força deslocada do centro equivale a colocar a mesma força no centro <strong>mais um momento fletor</strong> $M_{sd} = N_{sd}\cdot e_y$. Quando isso ocorre sobre um dos eixos de simetria da seção (e as barras de aço também são simétricas em relação a esse eixo), chamamos de <strong>Flexão Composta Normal (FCN)</strong> — "normal" porque a Linha Neutra (LN) permanece perfeitamente reta e perpendicular ao eixo onde a carga está (aqui, LN horizontal paralela ao eixo $x$).
+          <br><br>
+          <strong>Por que em pilares não calculamos $x$ direto como em vigas?</strong><br>
+          Em uma <em>viga</em>, $N_{sd} = 0$, então há apenas uma incógnita ($x$) e você resolve direto. Em um <em>pilar</em>, $N_{sd}$ e $M_{sd}$ atuam juntos: cada posição possível da linha neutra $x$ (desde $-\infty$ até $+\infty$) gera um par diferente de resistências $(N_{Rd};\, M_{Rd,t})$. Como não sabemos onde a LN vai parar para essa carga específica, fazemos o <strong>caminho inverso</strong>: fixamos a linha neutra nas <strong>7 posições fronteiriças entre os domínios de ruptura</strong>, calculamos $(N_{Rd};\, M_{Rd,t})$ em cada uma e ligamos os 7 pontos formando um <strong>Polígono de Segurança</strong>. Se o ponto pedido $(N_{sd};\, M_{sd,t})$ cair <em>dentro</em> desse polígono, o pilar passa!
+          <div style="margin-top:0.65rem; font-size:0.84rem; display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:0.5rem;">
+            <div style="background:rgba(255,255,255,0.82); padding:0.5rem 0.65rem; border-radius:7px; border:1px solid #bfdbfe;"><strong>⚠️ Os 2 Referenciais (Não confunda!):</strong><br>• <strong>Eixo $x$ e $d_i$ (Deformações):</strong> nasce no <em>topo comprimido</em> e desce até $h_n = 70\text{ cm}$. Mede onde está a LN e a altura útil de cada barra.<br>• <strong>Eixo $n$ (Momentos):</strong> nasce no <em>centroide (CG)</em> e aponta p/ cima ($+35$ no topo, $-35$ na base). Mede o braço de alavanca $n_{si}$!</div>
+            <div style="background:rgba(255,255,255,0.82); padding:0.5rem 0.65rem; border-radius:7px; border:1px solid #bfdbfe;"><strong>Reta a &amp; Dom. 1 (Tração pura/excêntrica):</strong> Toda a seção ou quase toda está esticando. Como o concreto não resiste à tração no ELU, desprezamos o concreto ($N_{Rd,c}=0$) e só o aço segura.</div>
+            <div style="background:rgba(255,255,255,0.82); padding:0.5rem 0.65rem; border-radius:7px; border:1px solid #bfdbfe;"><strong>Dom. 2 &amp; Dom. 3 (Ruptura dúctil):</strong> Parte superior comprime e inferior traciona com o aço escoando ($\varepsilon_s \ge \varepsilon_{yd}$). Na fronteira <code>3–4</code> ocorre o <strong>momento resistente máximo</strong> da seção!</div>
+            <div style="background:rgba(255,255,255,0.82); padding:0.5rem 0.65rem; border-radius:7px; border:1px solid #bfdbfe;"><strong>Dom. 4, 4a, 5 &amp; Reta b (Alta compressão):</strong> Concreto esmaga no topo ($-3{,}5\text{‰}$) antes do aço inferior escoar. Na <code>Reta b</code> (compressão pura), não há giro e toda a seção encurta igualmente em $-2{,}0\text{‰}$.</div>
           </div>
         </div>
 
@@ -1424,15 +1427,15 @@
           <div class="roteiro-flow">
             <div class="roteiro-step">
               <strong class="r-tag">1fcn–3fcn • Setup &amp; Solicitação</strong>
-              Calcule $f_{cd}, f_{yd}, \varepsilon_{yd}, \sigma_c = -\eta_c f_{cd}$, $A_s$, $d'$, $d$ e as coordenadas $n_i$ (positiva na borda $+n$, negativa na $-n$). Calcule $M_{sd,t} = N_{sd}\cdot e$.
+              Calcule $f_{cd}, f_{yd}, \varepsilon_{yd}, \sigma_c = -\eta_c f_{cd}$, $A_s$, $d'$, $d$ e as coordenadas $n_i$ (positiva acima do CG, negativa abaixo). Calcule $M_{sd,t} = N_{sd}\cdot e_y$ pela regra da mão direita.
             </div>
-            <div class="roteiro-step">
+            <div style="background:rgba(255,255,255,0.88); border:1px solid #cbd5e1; border-radius:9px; padding:0.7rem 0.85rem; font-size:0.83rem; color:#1e293b;">
               <strong class="r-tag">4fcn–6fcn • LN e Concreto</strong>
-              Calcule $x$ nos 7 limites (reta $a$, 1-2, 2-3, 3-4, 4-4a, 4a-5, reta $b$). Para $x &gt; 0$, ache $y = \zeta_c x$ (ou $h_n$ na reta $b$), $A_{cc} = h_t y$ e $S_{ct} = A_{cc}\frac{h_n - y}{2}$.
+              Calcule $x$ nos 7 limites (reta $a$, 1-2, 2-3, 3-4, 4-4a, 4a-5, reta $b$). Para $x &gt; 0$, ache a altura do bloco comprimido $y = \zeta_c x$ (ou $h_n$ na reta $b$), $A_{cc} = h_t y$ e $S_{ct} = A_{cc}\frac{h_n - y}{2}$.
             </div>
             <div class="roteiro-step">
               <strong class="r-tag">7fcn–9fcn • Aço e Soma</strong>
-              Para cada ponto, pegue $(\varepsilon_c, \varepsilon_s)$ na Tabela 10.1, ache $\varepsilon_{si}$ e $\sigma_{si} \in [-f_{yd}; +f_{yd}]$ e some $N_{Rd} = N_{Rd,c} + N_{Rd,s}$ e $M_{Rd,t} = M_{Rd,tc} + M_{Rd,ts}$.
+              Para cada um dos 7 pontos, pegue $(\varepsilon_c, \varepsilon_s)$ na Tabela 10.1, interpole $\varepsilon_{si}$, ache $\sigma_{si} \in [-f_{yd}; +f_{yd}]$ e some $N_{Rd} = N_{Rd,c} + N_{Rd,s}$ e $M_{Rd,t} = M_{Rd,tc} + M_{Rd,ts}$.
             </div>
             <div class="roteiro-step">
               <strong class="r-tag">10fcn • Polígono &amp; Decisão</strong>
@@ -1483,18 +1486,16 @@
             <text x="193" y="25" font-size="12" font-weight="800" fill="#0f172a">y, n (+)</text>
 
             <!-- 4 Bars (d'=6.1 -> 19.5px from edge) -->
-            <!-- Top bars 3,4 (+n = +28.9) at y=61.5 -->
             <circle cx="150" cy="62" r="5.5" fill="#16a34a" stroke="#0f172a" stroke-width="1.2"/>
             <text x="150" y="52" text-anchor="middle" font-size="10.5" font-weight="800" fill="#0f172a">3</text>
             <circle cx="222" cy="62" r="5.5" fill="#16a34a" stroke="#0f172a" stroke-width="1.2"/>
             <text x="222" y="52" text-anchor="middle" font-size="10.5" font-weight="800" fill="#0f172a">4</text>
-            <!-- Bottom bars 1,2 (-n = -28.9) at y=246.5 -->
             <circle cx="150" cy="246" r="5.5" fill="#16a34a" stroke="#0f172a" stroke-width="1.2"/>
             <text x="150" y="236" text-anchor="middle" font-size="10.5" font-weight="800" fill="#0f172a">1</text>
             <circle cx="222" cy="246" r="5.5" fill="#16a34a" stroke="#0f172a" stroke-width="1.2"/>
             <text x="222" y="236" text-anchor="middle" font-size="10.5" font-weight="800" fill="#0f172a">2</text>
 
-            <!-- Nsd point at +18.3 cm (18.3*3.2 = 58.6 px above CG -> y=95.4) -->
+            <!-- Nsd point at +18.3 cm -->
             <circle cx="186" cy="95.4" r="5.5" fill="#dc2626" stroke="#fff" stroke-width="1.5"/>
             <text x="255" y="99" font-size="11.5" font-weight="800" fill="#dc2626">Nsd = -2576,1 kN (ey = +18,3 cm)</text>
             <line x1="193" y1="95.4" x2="250" y2="95.4" stroke="#dc2626" stroke-width="1.2" stroke-dasharray="3,2"/>
@@ -1516,17 +1517,106 @@
             <text x="460" y="234" font-size="11.5" font-weight="800" fill="#b91c1c">Solicitação de Cálculo:</text>
             <text x="460" y="254" font-size="11.5" font-weight="700" fill="#b91c1c">Msd,t = Nsd · ey = -2576,1 × 18,3 = -47.142,63 kNcm</text>
           </svg>
-          <div class="svg-caption">Figura 3.1 — Seção $35 \times 70\text{ cm}$, posicionamento das $4\phi 22{,}0\text{ mm}$ e convenção de sinais ($x$ desce a partir da fibra mais comprimida superior; $n$ aponta para cima a partir do CG).</div>
+          <div class="svg-caption">Figura 3.1 — Seção $35 \times 70\text{ cm}$, posicionamento das $4\phi 22{,}0\text{ mm}$ e convenção de sinais ($d_i$ desce a partir da borda comprimida superior; $n_i$ sobe a partir do CG).</div>
+        </div>
+
+        <!-- SVG 3.1b: Os 7 perfis de deformação nos domínios -->
+        <div class="svg-panel">
+          <svg viewBox="0 0 910 215" xmlns="http://www.w3.org/2000/svg" font-family="Inter, sans-serif">
+            <text x="455" y="20" text-anchor="middle" font-size="12.5" font-weight="800" fill="#0f172a">Como a Linha Neutra (LN) desce pelos 7 pontos do Polígono de Segurança (Encurtamento − à esq. | Alongamento + à dir.)</text>
+            <!-- 7 mini-diagrams spaced by 125px starting x=65 -->
+            <!-- Common top y=52 (0), d y=155 (63.9cm), bottom y=166 (70cm). Scale y=52 + 1.63*cm -->
+            <!-- 1. Reta a: eps_c=+10, eps_s=+10 -->
+            <g transform="translate(30,0)">
+              <text x="45" y="42" text-anchor="middle" font-size="10.5" font-weight="800" fill="#6d28d9">① Reta a (x=-∞)</text>
+              <line x1="45" y1="52" x2="45" y2="166" stroke="#94a3b8" stroke-width="1.4"/>
+              <polygon points="45,52 75,52 75,166 45,166" fill="#16a34a" fill-opacity="0.22" stroke="#16a34a" stroke-width="1.6"/>
+              <text x="77" y="60" font-size="9" font-weight="700" fill="#15803d">+10‰</text>
+              <text x="77" y="160" font-size="9" font-weight="700" fill="#15803d">+10‰</text>
+              <text x="45" y="185" text-anchor="middle" font-size="9.5" fill="#475569">Só tração</text>
+              <text x="45" y="198" text-anchor="middle" font-size="9.5" font-weight="700" fill="#0f766e">Acc = 0</text>
+            </g>
+            <!-- 2. 1-2: eps_c=0, eps_s=+10 -->
+            <g transform="translate(155,0)">
+              <text x="45" y="42" text-anchor="middle" font-size="10.5" font-weight="800" fill="#1d4ed8">② 1–2 (x=0)</text>
+              <line x1="45" y1="52" x2="45" y2="166" stroke="#94a3b8" stroke-width="1.4"/>
+              <polygon points="45,52 75,155 78,166 45,166" fill="#16a34a" fill-opacity="0.22" stroke="#16a34a" stroke-width="1.6"/>
+              <circle cx="45" cy="52" r="3" fill="#dc2626"/>
+              <text x="51" y="60" font-size="9" font-weight="700" fill="#334155">0‰</text>
+              <text x="78" y="160" font-size="9" font-weight="700" fill="#15803d">+10‰</text>
+              <text x="45" y="185" text-anchor="middle" font-size="9.5" fill="#475569">LN no topo</text>
+              <text x="45" y="198" text-anchor="middle" font-size="9.5" font-weight="700" fill="#0f766e">Acc = 0</text>
+            </g>
+            <!-- 3. 2-3: x=16.57 -> y_ln=79, eps_c=-3.5, eps_s=+10 -->
+            <g transform="translate(280,0)">
+              <text x="45" y="42" text-anchor="middle" font-size="10.5" font-weight="800" fill="#1d4ed8">③ 2–3 (x=16,6)</text>
+              <line x1="45" y1="52" x2="45" y2="166" stroke="#94a3b8" stroke-width="1.4"/>
+              <polygon points="45,52 30,52 45,79" fill="#dc2626" fill-opacity="0.25" stroke="#dc2626" stroke-width="1.4"/>
+              <polygon points="45,79 75,155 78,166 45,166" fill="#16a34a" fill-opacity="0.2" stroke="#16a34a" stroke-width="1.4"/>
+              <circle cx="45" cy="79" r="3" fill="#dc2626"/>
+              <text x="28" y="61" text-anchor="end" font-size="9" font-weight="700" fill="#b91c1c">-3,5‰</text>
+              <text x="77" y="160" font-size="9" font-weight="700" fill="#15803d">+10‰</text>
+              <text x="45" y="185" text-anchor="middle" font-size="9.5" fill="#475569">Aço escoa</text>
+              <text x="45" y="198" text-anchor="middle" font-size="9.5" font-weight="700" fill="#1d4ed8">y = 13,25 cm</text>
+            </g>
+            <!-- 4. 3-4: x=40.15 -> y_ln=117, eps_c=-3.5, eps_s=+2.07 -->
+            <g transform="translate(405,0)">
+              <text x="45" y="42" text-anchor="middle" font-size="10.5" font-weight="800" fill="#b45309">④ 3–4 (x=40,2)</text>
+              <line x1="45" y1="52" x2="45" y2="166" stroke="#94a3b8" stroke-width="1.4"/>
+              <polygon points="45,52 28,52 45,117" fill="#dc2626" fill-opacity="0.28" stroke="#dc2626" stroke-width="1.4"/>
+              <polygon points="45,117 57,155 60,166 45,166" fill="#16a34a" fill-opacity="0.2" stroke="#16a34a" stroke-width="1.4"/>
+              <circle cx="45" cy="117" r="3" fill="#dc2626"/>
+              <text x="26" y="61" text-anchor="end" font-size="9" font-weight="700" fill="#b91c1c">-3,5‰</text>
+              <text x="61" y="160" font-size="9" font-weight="700" fill="#15803d">+2,07</text>
+              <text x="45" y="185" text-anchor="middle" font-size="9.5" font-weight="700" fill="#b45309">Máx. Mrd!</text>
+              <text x="45" y="198" text-anchor="middle" font-size="9.5" font-weight="700" fill="#1d4ed8">y = 32,12 cm</text>
+            </g>
+            <!-- 5. 4-4a: x=d=63.9 -> y_ln=155, eps_c=-3.5, eps_s=0 -->
+            <g transform="translate(530,0)">
+              <text x="45" y="42" text-anchor="middle" font-size="10.5" font-weight="800" fill="#1d4ed8">⑤ 4–4a (x=d)</text>
+              <line x1="45" y1="52" x2="45" y2="166" stroke="#94a3b8" stroke-width="1.4"/>
+              <polygon points="45,52 25,52 45,155" fill="#dc2626" fill-opacity="0.28" stroke="#dc2626" stroke-width="1.4"/>
+              <circle cx="45" cy="155" r="3" fill="#dc2626"/>
+              <text x="23" y="61" text-anchor="end" font-size="9" font-weight="700" fill="#b91c1c">-3,5‰</text>
+              <text x="51" y="159" font-size="9" font-weight="700" fill="#334155">0‰</text>
+              <text x="45" y="185" text-anchor="middle" font-size="9.5" fill="#475569">LN na arm. inf.</text>
+              <text x="45" y="198" text-anchor="middle" font-size="9.5" font-weight="700" fill="#1d4ed8">y = 51,12 cm</text>
+            </g>
+            <!-- 6. 4a-5: x=h=70 -> y_ln=166, eps_c=-3.5, eps_s=-0.305 -->
+            <g transform="translate(655,0)">
+              <text x="45" y="42" text-anchor="middle" font-size="10.5" font-weight="800" fill="#1d4ed8">⑥ 4a–5 (x=hy)</text>
+              <line x1="45" y1="52" x2="45" y2="166" stroke="#94a3b8" stroke-width="1.4"/>
+              <polygon points="45,52 24,52 45,166" fill="#dc2626" fill-opacity="0.32" stroke="#dc2626" stroke-width="1.4"/>
+              <circle cx="45" cy="166" r="3" fill="#dc2626"/>
+              <text x="22" y="61" text-anchor="end" font-size="9" font-weight="700" fill="#b91c1c">-3,5‰</text>
+              <text x="50" y="162" font-size="8.5" font-weight="700" fill="#b91c1c">-0,31</text>
+              <text x="45" y="185" text-anchor="middle" font-size="9.5" fill="#475569">LN na base</text>
+              <text x="45" y="198" text-anchor="middle" font-size="9.5" font-weight="700" fill="#1d4ed8">y = 56,00 cm</text>
+            </g>
+            <!-- 7. Reta b: x=+inf -> eps_c=-2.0, eps_s=-2.0 -->
+            <g transform="translate(780,0)">
+              <text x="45" y="42" text-anchor="middle" font-size="10.5" font-weight="800" fill="#b91c1c">⑦ Reta b (x=+∞)</text>
+              <line x1="45" y1="52" x2="45" y2="166" stroke="#94a3b8" stroke-width="1.4"/>
+              <polygon points="45,52 30,52 30,166 45,166" fill="#dc2626" fill-opacity="0.34" stroke="#dc2626" stroke-width="1.6"/>
+              <text x="27" y="61" text-anchor="end" font-size="9" font-weight="700" fill="#b91c1c">-2,0‰</text>
+              <text x="27" y="160" text-anchor="end" font-size="9" font-weight="700" fill="#b91c1c">-2,0‰</text>
+              <text x="45" y="185" text-anchor="middle" font-size="9.5" fill="#475569">Compr. pura</text>
+              <text x="45" y="198" text-anchor="middle" font-size="9.5" font-weight="700" fill="#b91c1c">y = 70,00 cm</text>
+            </g>
+          </svg>
+          <div class="svg-caption">Figura 3.1b — Evolução física da deformação na seção: da tração uniforme (①) até a compressão uniforme (⑦), o bloco comprimido (vermelho) cresce enquanto a tração (verde) encolhe.</div>
         </div>
 
         <!-- Passo 1 -->
         <div class="step-card">
           <div class="step-header">
             <div class="step-title"><span class="step-num">1</span> Dados Preliminares, Convenção de Sinais e Constantes da Seção (<code>1fcn–3fcn</code>)</div>
-            <span class="formula-ref"><button class="code-pill" data-code="10.21">[10.21]</button></span>
+            <span class="formula-ref"><button class="code-pill" data-code="10.21">[10.21]</button> <button class="code-pill" data-code="10.11">[10.11]</button></span>
           </div>
-          <p style="margin:0 0 0.5rem; font-size:0.88rem; color:#334155;"><strong>Por que fazemos esta etapa?</strong> Precisamos transformar as resistências características ($f_{ck}, f_{yk}$) em valores de cálculo ($f_{cd}, f_{yd}$) e definir a tensão constante do bloco retangular do concreto ($\sigma_c$). Note que usamos $\eta_c = 0{,}9\alpha_c = 0{,}765$ (e não $0{,}85$) conforme a Seção 10.7.2 da apostila, um fator redutor de $10\%$ a favor da segurança adotado em pilares.</p>
-          <div class="grid-2" style="margin-bottom:0.5rem;">
+          <p style="margin:0 0 0.55rem; font-size:0.88rem; color:#334155;"><strong>O que estamos fazendo aqui e por quê?</strong><br>
+          1. <strong>Materiais em cálculo:</strong> Dividimos as resistências características pelos coeficientes de segurança ($\gamma_c = 1{,}4$ para o concreto e $\gamma_s = 1{,}15$ para o aço). No concreto comprimido, multiplicamos $f_{cd}$ por $\alpha_c = 0{,}85$ (efeito Rüsch de cargas mantidas) e por mais $0{,}9$ (regra de pilares, Seção 10.7.2, para compensar eventuais reduções de largura comprimida): daí vem $\eta_c = 0{,}9 \times 0{,}85 = 0{,}765$ e o sinal negativo em $\sigma_c = -2{,}732\text{ kN/cm}^2$ (compressão).<br>
+          2. <strong>Deformação limite do aço ($\varepsilon_{yd}$):</strong> É quanto o aço CA-50 aguenta esticar ou encurtar antes de entrar no patamar plástico ($\sigma = \pm f_{yd}$). Pela Lei de Hooke, $\varepsilon_{yd} = f_{yd}/E_s = 2{,}070\text{‰}$. Qualquer barra com $|\varepsilon_{si}| \ge 2{,}070\text{‰}$ trabalha com tensão travada em $\pm 43{,}478\text{ kN/cm}^2$!</p>
+          <div class="grid-2" style="margin-bottom:0.55rem;">
             <div>
               <p style="margin:0 0 0.4rem;"><strong>Concreto C50 (Grupo I):</strong></p>
               <div class="formula-row">
@@ -1540,21 +1630,26 @@
               <div class="formula-row">
                 <div class="formula-math">$$f_{yd} = \frac{50}{1{,}15} = 43{,}478\text{ kN/cm}^2 \quad \varepsilon_{yd} = \frac{43{,}478}{21000} = 2{,}070\text{‰}$$
                 $$A_s = 4\frac{\pi\cdot 2{,}2^2}{4} = 15{,}205\text{ cm}^2 \quad \left(\frac{A_s}{b_s} = 3{,}8013\text{ cm}^2/\text{barra}\right)$$
-                $$A_{s,\min} = 0{,}004(2450) = 9{,}80 &lt; 15{,}205 &lt; A_{s,\max} = 196{,}0\text{ cm}^2 \;\checkmark$$</div>
+                $$A_{s,\min} = \max\left(\frac{0{,}15(2576{,}1)}{43{,}478};\, 0{,}004\cdot 2450\right) = 9{,}80 &lt; 15{,}205 &lt; A_{s,\max} = 196{,}0\text{ cm}^2\;\checkmark$$</div>
               </div>
             </div>
           </div>
-          <p style="margin:0; font-size:0.86rem; color:#1e293b;"><strong>Por que o momento solicitante é negativo ($M_{sd,t} = -47142{,}63\text{ kNcm}$)?</strong> Pela <em>regra da mão direita</em>: a carga de compressão $N_{sd} = -2576{,}1\text{ kN}$ (entrando na seção, direção $-z$) aplicada acima do centroide ($e_y = +18{,}3\text{ cm}$) tende a girar a seção no sentido negativo do eixo $x$ ($t$), comprimindo a borda superior ($+n$) e descomprimindo a borda inferior ($-n$). Como $d' = 6{,}1\text{ cm}$ é a distância do centro da barra à borda, sua distância ao centroide é $35{,}0 - 6{,}1 = 28{,}9\text{ cm}$ ($+28{,}9$ nas barras 3 e 4; $-28{,}9$ nas barras 1 e 2).</p>
+          <p style="margin:0; font-size:0.86rem; color:#1e293b;"><strong>Geometria das barras e Momento Solicitante ($M_{sd,t}$):</strong><br>
+          • Distância da borda ao centro da barra: $d' = c_{\text{nom}} + \phi_t + \frac{\phi_l}{2} = 4{,}5 + 0{,}5 + 1{,}1 = 6{,}1\text{ cm}$. Logo $d = 70{,}0 - 6{,}1 = 63{,}9\text{ cm}$.<br>
+          • Braço ao centroide ($h_y/2 = 35{,}0\text{ cm}$): barras superiores 3 e 4 ficam em $n_{3,4} = +(35{,}0 - 6{,}1) = +28{,}9\text{ cm}$; inferiores 1 e 2 em $n_{1,2} = -28{,}9\text{ cm}$.<br>
+          • Pela <em>regra da mão direita</em>, $N_{sd} = -2576{,}1\text{ kN}$ em $e_y = +18{,}3\text{ cm}$ produz $M_{sd,t} = -2576{,}1 \times 18{,}3 = \mathbf{-47142{,}63\text{ kNcm}}$ (supera o momento mínimo $M_{sd,\min,x} = 2576{,}1(0{,}015+0{,}03\times 0{,}70)\times 100 = 9273{,}96\text{ kNcm}$ ✓).</p>
         </div>
 
         <!-- Passo 2 -->
         <div class="step-card teal">
           <div class="step-header">
-            <div class="step-title"><span class="step-num">2</span> Posições da Linha Neutra ($x$) e Bloco Comprimido ($y, A_{cc}, S_{ct}$) (<code>4fcn–6fcn</code>)</div>
+            <div class="step-title"><span class="step-num">2</span> Posições da Linha Neutra ($x$) e Parcela do Concreto ($y, A_{cc}, S_{ct}$) (<code>4fcn–6fcn</code>)</div>
             <span class="formula-ref"><button class="code-pill" data-code="4fcn">[4fcn]</button> <button class="code-pill" data-code="5fcn">[5fcn]</button> <button class="code-pill" data-code="6fcn">[6fcn]</button></span>
           </div>
-          <p style="margin:0 0 0.5rem;"><strong>Por que calculamos $y$, $A_{cc}$ e $S_{ct}$ primeiro?</strong> A linha neutra $x$ separa o que está comprimido do que está tracionado (e tem origem na borda mais comprimida superior, crescendo para baixo). Como o diagrama simplificado substitui a parábola do concreto por um retângulo de altura $y = \zeta_c x = 0{,}8 x$, a força do concreto será $N_{Rd,c} = \sigma_c A_{cc}$ e o momento dessa força em torno do centroide será $M_{Rd,tc} = \sigma_c S_{ct}$.<br>
-          <strong>De onde vem $S_{ct} = A_{cc}\frac{h_n - y}{2}$?</strong> O centroide do retângulo comprimido (de altura $y$) fica a $y/2$ da borda superior; como o centroide da seção fica a $h_n/2$ da borda superior, o braço de alavanca do concreto é exatamente $\frac{h_n}{2} - \frac{y}{2} = \frac{h_n - y}{2}$ (sempre positivo, e como $\sigma_c &lt; 0$, resulta $M_{Rd,tc} \le 0$).</p>
+          <p style="margin:0 0 0.5rem;"><strong>Como achamos $x$ nos pontos <code>2–3</code> e <code>3–4</code>?</strong> É pura semelhança de triângulos no diagrama de deformações! O triângulo superior tem base $|\varepsilon_c|$ e altura $x$; o triângulo inferior tem base $|\varepsilon_s|$ e altura $d - x$. Igualando as inclinações: $\frac{x}{d} = \frac{|\varepsilon_c|}{|\varepsilon_c| + |\varepsilon_s|}$:<br>
+          • No limite <code>2–3</code>: $\varepsilon_c = -3{,}5\text{‰}$ e $\varepsilon_s = +10{,}0\text{‰} \implies x_{2-3} = 63{,}9\frac{3{,}5}{3{,}5 + 10{,}0} = 16{,}567\text{ cm}$.<br>
+          • No limite <code>3–4</code>: $\varepsilon_c = -3{,}5\text{‰}$ e $\varepsilon_s = +\varepsilon_{yd} = +2{,}070\text{‰} \implies x_{3-4} = 63{,}9\frac{3{,}5}{3{,}5 + 2{,}070} = 40{,}150\text{ cm}$.<br>
+          <strong>Por que $S_{ct} = A_{cc}\frac{h_n - y}{2}$?</strong> Na <code>Reta a</code> e em <code>1–2</code>, não há concreto comprimido ($A_{cc}=0$). Nos demais casos, o bloco retangular equivalente tem altura $y = 0{,}8 x$ (exceto na <code>Reta b</code>, onde toda a seção comprime uniformemente e $y = h_n = 70{,}0\text{ cm}$). O centroide desse retângulo comprimido está a $\frac{y}{2}$ do topo, e o CG da seção está a $\frac{h_n}{2}$ do topo — logo o braço de alavanca do concreto é $\frac{h_n}{2} - \frac{y}{2} = \frac{h_n - y}{2}$. Na <code>Reta b</code>, o bloco ocupa toda a seção ($y = h_n$), seu centroide coincide com o CG, e portanto $S_{ct} = 0$ (compressão centrada não gera momento!).</p>
           <div class="table-wrap">
             <table>
               <thead>
@@ -1588,63 +1683,64 @@
             <div class="step-title"><span class="step-num">3</span> Deformações, Tensões nas Barras e Esforços Resistentes Totais (<code>7fcn–9fcn</code>)</div>
             <span class="formula-ref"><button class="code-pill" data-code="T10.1">[T10.1]</button> <button class="code-pill" data-code="10.22">[10.22]</button> <button class="code-pill" data-code="10.23">[10.23]</button> <button class="code-pill" data-code="10.29">[10.29]</button></span>
           </div>
-          <p style="margin:0 0 0.5rem;"><strong>Por que interpolamos as deformações?</strong> Pela hipótese de Bernoulli (<em>seções permanecem planas após a deformação</em>), a deformação varia linearmente da fibra superior ($\varepsilon_c$, na posição $0$) até a armadura inferior ($\varepsilon_s$, na posição $d$). Para cada ponto, pegamos $(\varepsilon_c, \varepsilon_s)$ na Tabela 10.1 e interpolamos nas barras superiores ($d_{3,4} = 6{,}1\text{ cm}$, $n_{3,4} = +28{,}9\text{ cm}$) e inferiores ($d_{1,2} = 63{,}9\text{ cm}$, $n_{1,2} = -28{,}9\text{ cm}$) via $\varepsilon_{si} = (\varepsilon_s - \varepsilon_c)\frac{d_i}{d} + \varepsilon_c$, convertendo para tensão $\sigma_{si} = 21\cdot \varepsilon_{si}\text{ [kN/cm}^2\text{]}$ limitada ao patamar de escoamento $\pm f_{yd} = \pm 43{,}478\text{ kN/cm}^2$:</p>
+          <p style="margin:0 0 0.55rem;"><strong>Como calculamos a força e o momento de cada barra?</strong> Pela hipótese de Bernoulli (<em>seção plana continua plana</em>), a deformação varia em linha reta da fibra superior ($\varepsilon_c$ em $d_i=0$) até a armadura inferior ($\varepsilon_s$ em $d_i=d$). Para achar a deformação de qualquer barra na profundidade $d_i$, interpolamos: $\varepsilon_{si} = (\varepsilon_s - \varepsilon_c)\frac{d_i}{d} + \varepsilon_c$. Depois, multiplicamos por $E_s/1000 = 21\text{ kN/cm}^2$ (para converter $\text{‰}$ em adimensional) e <strong>travamos</strong> em $\pm f_{yd} = \pm 43{,}478\text{ kN/cm}^2$. Como há $2$ barras em cima ($A_{s,\text{sup}} = 2 \times 3{,}8013 = 7{,}6027\text{ cm}^2$, em $n=+28{,}9\text{ cm}$) e $2$ barras embaixo ($A_{s,\text{inf}} = 7{,}6027\text{ cm}^2$, em $n=-28{,}9\text{ cm}$), fica super direto:</p>
 
           <div class="grid-2" style="margin-bottom:0.75rem;">
             <div class="card-box">
-              <h4>① Reta $a$ ($x = -\infty$, tração uniforme)</h4>
-              <p style="margin:0; font-size:0.83rem;">$\varepsilon_c = \varepsilon_s = +10{,}0\text{‰} \implies \sigma_{s1..4} = +43{,}478\text{ kN/cm}^2$.<br>
-              $N_{Rd,s} = 4 \times 3{,}8013 \times 43{,}478 = +661{,}098\text{ kN}$<br>
-              $M_{Rd,ts} = 0$ (simetria das 4 barras).<br>
+              <h4>① Reta $a$ ($x = -\infty$, tração uniforme pura)</h4>
+              <p style="margin:0; font-size:0.83rem;"><strong>Física:</strong> Todas as fibras esticam juntas no limite de tração do aço ($\varepsilon_c = \varepsilon_s = +10{,}0\text{‰}$).<br>
+              • $\sigma_{s1..4} = 21(10{,}0) = 210 &gt; 43{,}478 \implies \sigma_{si} = +43{,}478\text{ kN/cm}^2$.<br>
+              • $N_{Rd,s} = 4 \times 3{,}8013 \times 43{,}478 = +661{,}098\text{ kN}$.<br>
+              • $M_{Rd,ts} = 7{,}6027(43{,}478)(+28{,}9) + 7{,}6027(43{,}478)(-28{,}9) = 0$ (simetria cancela!).<br>
               <strong>Total:</strong> $N_{Rd,a} = \mathbf{661{,}098\text{ kN}}$ | $M_{Rd,a} = \mathbf{0{,}0\text{ kNcm}}$.</p>
             </div>
             <div class="card-box">
-              <h4>② Interface 1–2 ($x = 0{,}0\text{ cm}$)</h4>
-              <p style="margin:0; font-size:0.83rem;">$\varepsilon_c = 0{,}0\text{‰}$, $\varepsilon_s = +10{,}0\text{‰}$.<br>
-              • Sup. (3,4): $\varepsilon_{s3,4} = 10\frac{6{,}1}{63{,}9} = +0{,}955\text{‰} \implies \sigma = 20{,}047\text{ kN/cm}^2$<br>
-              • Inf. (1,2): $\varepsilon_{s1,2} = +10{,}0\text{‰} \implies \sigma = +43{,}478\text{ kN/cm}^2$<br>
-              $N_{Rd,s} = 2(3{,}8013)(20{,}047 + 43{,}478) = \mathbf{482{,}96\text{ kN}}$<br>
-              $M_{Rd,ts} = 2(3{,}8013)(20{,}047 - 43{,}478)(28{,}9) = \mathbf{-5148{,}194\text{ kNcm}}$.</p>
+              <h4>② Interface 1–2 ($x = 0{,}0\text{ cm}$, LN na borda superior)</h4>
+              <p style="margin:0; font-size:0.83rem;"><strong>Física:</strong> Topo em $0\text{‰}$, base em $+10{,}0\text{‰}$. Concreto ainda todo tracionado ($N_{Rd,c}=0$).<br>
+              • Barras 3,4 ($d_i=6{,}1$): $\varepsilon_{s3,4} = 10\frac{6{,}1}{63{,}9} = +0{,}955\text{‰} \implies \sigma_{3,4} = 21(0{,}955) = +20{,}047\text{ kN/cm}^2$ (não escoam!).<br>
+              • Barras 1,2 ($d_i=63{,}9$): $\varepsilon_{s1,2} = +10{,}0\text{‰} \implies \sigma_{1,2} = +43{,}478\text{ kN/cm}^2$.<br>
+              • $N_{Rd,s} = 7{,}6027(20{,}047 + 43{,}478) = \mathbf{482{,}96\text{ kN}}$.<br>
+              • $M_{Rd,ts} = 7{,}6027[20{,}047(+28{,}9) + 43{,}478(-28{,}9)] = \mathbf{-5148{,}194\text{ kNcm}}$.</p>
             </div>
             <div class="card-box">
-              <h4>③ Interface 2–3 ($x = 16{,}567\text{ cm}$)</h4>
-              <p style="margin:0; font-size:0.83rem;">$\varepsilon_c = -3{,}5\text{‰}$, $\varepsilon_s = +10{,}0\text{‰}$.<br>
-              • Sup. (3,4): $\varepsilon_{s3,4} = (13{,}5)\frac{6{,}1}{63{,}9} - 3{,}5 = -2{,}211\text{‰} \implies \sigma = -43{,}478$<br>
-              • Inf. (1,2): $\varepsilon_{s1,2} = +10{,}0\text{‰} \implies \sigma = +43{,}478$<br>
-              $N_{Rd,s} = 0$ e $M_{Rd,ts} = -19105{,}24\text{ kNcm}$.<br>
-              <strong>Total:</strong> $N_{Rd,2-3} = \mathbf{-1267{,}347\text{ kN}}$ | $M_{Rd,2-3} = \mathbf{-55064{,}181\text{ kNcm}}$.</p>
+              <h4>③ Interface 2–3 ($x = 16{,}567\text{ cm}$, LN entra na seção)</h4>
+              <p style="margin:0; font-size:0.83rem;"><strong>Física:</strong> Topo rompe no concreto ($\varepsilon_c = -3{,}5\text{‰}$) e base no aço ($\varepsilon_s = +10{,}0\text{‰}$).<br>
+              • Barras 3,4: $\varepsilon_{s3,4} = (10+3{,}5)\frac{6{,}1}{63{,}9} - 3{,}5 = -2{,}211\text{‰} \implies 21(-2{,}211) = -46{,}43 \implies \sigma_{3,4} = -43{,}478$.<br>
+              • Barras 1,2: $\varepsilon_{s1,2} = +10{,}0\text{‰} \implies \sigma_{1,2} = +43{,}478$.<br>
+              • <strong>Por que $N_{Rd,s} = 0$?</strong> As forças de cima ($-330{,}55\text{ kN}$) e de baixo ($+330{,}55\text{ kN}$) são iguais e opostas (binário puro!): $M_{Rd,ts} = -330{,}55(28{,}9) - 330{,}55(28{,}9) = -19105{,}24\text{ kNcm}$.<br>
+              <strong>Total:</strong> $N_{Rd,2-3} = -1267{,}35 + 0 = \mathbf{-1267{,}347\text{ kN}}$ | $M_{Rd,2-3} = -35958{,}94 - 19105{,}24 = \mathbf{-55064{,}181\text{ kNcm}}$.</p>
             </div>
             <div class="card-box">
-              <h4>④ Interface 3–4 ($x = 40{,}150\text{ cm}$)</h4>
-              <p style="margin:0; font-size:0.83rem;">$\varepsilon_c = -3{,}5\text{‰}$, $\varepsilon_s = +2{,}070\text{‰}$.<br>
-              • Sup. (3,4): $\varepsilon_{s3,4} = -2{,}968\text{‰} \implies \sigma = -43{,}478$<br>
-              • Inf. (1,2): $\varepsilon_{s1,2} = +2{,}070\text{‰} \implies \sigma = +43{,}478$<br>
-              $N_{Rd,s} = 0$ e $M_{Rd,ts} = -19105{,}24\text{ kNcm}$ (máximo momento!).<br>
+              <h4>④ Interface 3–4 ($x = 40{,}150\text{ cm}$, ponto de momento máximo)</h4>
+              <p style="margin:0; font-size:0.83rem;"><strong>Física:</strong> Concreto em $-3{,}5\text{‰}$ e aço inferior exatamente no limiar de escoamento ($+\varepsilon_{yd} = +2{,}070\text{‰}$).<br>
+              • Barras 3,4: $\varepsilon_{s3,4} = (2{,}07+3{,}5)\frac{6{,}1}{63{,}9} - 3{,}5 = -2{,}968\text{‰} \implies \sigma_{3,4} = -43{,}478$.<br>
+              • Barras 1,2: $\varepsilon_{s1,2} = +2{,}070\text{‰} \implies \sigma_{1,2} = +43{,}478$.<br>
+              • Novamente o aço forma um binário puro ($N_{Rd,s}=0$, $M_{Rd,ts}=-19105{,}24$), somado ao maior momento do concreto ($M_{Rd,tc}=-58170{,}0$).<br>
               <strong>Total:</strong> $N_{Rd,3-4} = \mathbf{-3071{,}566\text{ kN}}$ | $M_{Rd,3-4} = \mathbf{-77275{,}22\text{ kNcm}}$.</p>
             </div>
             <div class="card-box">
-              <h4>⑤ Interface 4–4a ($x = 63{,}900\text{ cm}$)</h4>
-              <p style="margin:0; font-size:0.83rem;">$\varepsilon_c = -3{,}5\text{‰}$, $\varepsilon_s = 0{,}0\text{‰}$.<br>
-              • Sup. (3,4): $\varepsilon_{s3,4} = -3{,}166\text{‰} \implies \sigma = -43{,}478$<br>
-              • Inf. (1,2): $\varepsilon_{s1,2} = 0{,}0\text{‰} \implies \sigma = 0{,}0$<br>
-              $N_{Rd,s} = -330{,}55\text{ kN}$ e $M_{Rd,ts} = -9552{,}62\text{ kNcm}$.<br>
-              <strong>Total:</strong> $N_{Rd,4-4a} = \mathbf{-5218{,}643\text{ kN}}$ | $M_{Rd,4-4a} = \mathbf{-55696{,}476\text{ kNcm}}$.</p>
+              <h4>⑤ Interface 4–4a ($x = 63{,}900\text{ cm}$, LN sobre a armadura 1,2)</h4>
+              <p style="margin:0; font-size:0.83rem;"><strong>Física:</strong> A LN desceu até a altura útil $d$: as barras inferiores ficam com deformação nula ($\varepsilon_s = 0\text{‰}$).<br>
+              • Barras 3,4: $\varepsilon_{s3,4} = (0+3{,}5)\frac{6{,}1}{63{,}9} - 3{,}5 = -3{,}166\text{‰} \implies \sigma_{3,4} = -43{,}478$.<br>
+              • Barras 1,2: $\varepsilon_{s1,2} = 0\text{‰} \implies \sigma_{1,2} = 0{,}0$ (não trabalham!).<br>
+              • $N_{Rd,s} = 7{,}6027(-43{,}478) = -330{,}55\text{ kN}$; $M_{Rd,ts} = -330{,}55(+28{,}9) = -9552{,}62\text{ kNcm}$.<br>
+              <strong>Total:</strong> $N_{Rd,4-4a} = -4888{,}09 - 330{,}55 = \mathbf{-5218{,}643\text{ kN}}$ | $M_{Rd,4-4a} = \mathbf{-55696{,}476\text{ kNcm}}$.</p>
             </div>
             <div class="card-box">
-              <h4>⑥ Interface 4a–5 ($x = 70{,}000\text{ cm}$)</h4>
-              <p style="margin:0; font-size:0.83rem;">$\varepsilon_c = -3{,}5\text{‰}$, $\varepsilon_s = -3{,}5\frac{70-63{,}9}{70} = -0{,}305\text{‰}$.<br>
-              • Sup. (3,4): $\varepsilon_{s3,4} = -3{,}195\text{‰} \implies \sigma = -43{,}478$<br>
-              • Inf. (1,2): $\varepsilon_{s1,2} = -0{,}305\text{‰} \implies \sigma = -6{,}405\text{ kN/cm}^2$<br>
-              $N_{Rd,s} = -379{,}24\text{ kN}$ e $M_{Rd,ts} = -8145{,}4\text{ kNcm}$.<br>
+              <h4>⑥ Interface 4a–5 ($x = 70{,}000\text{ cm}$, LN na borda inferior)</h4>
+              <p style="margin:0; font-size:0.83rem;"><strong>Física:</strong> Toda a altura $h_y = 70\text{ cm}$ está comprimida! Na Tabela 10.1, $\varepsilon_s = -3{,}5\frac{70-63{,}9}{70} = -0{,}305\text{‰}$ (por semelhança desde o fundo onde $\varepsilon=0$).<br>
+              • Barras 3,4: $\varepsilon_{s3,4} = -3{,}195\text{‰} \implies \sigma_{3,4} = -43{,}478$.<br>
+              • Barras 1,2: $\varepsilon_{s1,2} = -0{,}305\text{‰} \implies \sigma_{1,2} = 21(-0{,}305) = -6{,}405\text{ kN/cm}^2$ (já comprimidas!).<br>
+              • $N_{Rd,s} = 7{,}6027(-43{,}478 - 6{,}405) = -379{,}24\text{ kN}$; $M_{Rd,ts} = 7{,}6027(-43{,}478 + 6{,}405)(28{,}9) = -8145{,}4\text{ kNcm}$.<br>
               <strong>Total:</strong> $N_{Rd,4a-5} = \mathbf{-5733{,}964\text{ kN}}$ | $M_{Rd,4a-5} = \mathbf{-45628{,}617\text{ kNcm}}$.</p>
             </div>
           </div>
 
           <div class="callout callout-danger">
-            <strong>⑦ Reta $b$ ($x = +\infty$, compressão uniforme) — Cuidado com as 2 pegadinhas clássicas!</strong><br>
-            1. Na compressão uniforme centrada (Tabela 10.1), a deformação limite de toda a seção é <strong>$-\varepsilon_{c2} = -2{,}0\text{‰}$</strong> (e NÃO $-3{,}5\text{‰}$!). Como $|-2{,}0\text{‰}| &lt; \varepsilon_{yd} = 2{,}070\text{‰}$, o aço CA-50 <strong>não escoa</strong>: $\sigma_{si} = 21\times (-2{,}0) = -42{,}000\text{ kN/cm}^2$, logo $N_{Rd,s} = 15{,}205 \times (-42{,}0) = -638{,}62\text{ kN}$.<br>
-            2. A tensão no concreto continua usando $\eta_c = 0{,}9\alpha_c = 0{,}765$ (seção 10.7.2 da apostila): $N_{Rd,c} = -2{,}732 \times 2450 = -6693{,}40\text{ kN}$.<br>
-            <strong>Total Reta $b$:</strong> $N_{Rd,b} = -6693{,}40 - 638{,}62 = \mathbf{-7332{,}024\text{ kN}}$ | $M_{Rd,b} = \mathbf{0{,}0\text{ kNcm}}$.
+            <strong>⑦ Reta $b$ ($x = +\infty$, compressão uniforme centrada) — Cuidado com as 2 pegadinhas clássicas!</strong><br>
+            1. <strong>Por que a deformação cai para $-\varepsilon_{c2} = -2{,}0\text{‰}$?</strong> Quando há flexão, parte da seção ajuda a restringir a borda mais comprimida, permitindo que ela chegue a $-3{,}5\text{‰}$. Na compressão uniforme centrada, <em>toda a seção encurta por igual</em> e o concreto esmaga já em $-2{,}0\text{‰}$! Como $|-2{,}0\text{‰}| &lt; \varepsilon_{yd} = 2{,}070\text{‰}$, o aço CA-50 <strong>ainda está no trecho elástico (não escoa!)</strong>: $\sigma_{si} = 21\times (-2{,}0) = -42{,}000\text{ kN/cm}^2 \implies N_{Rd,s} = 15{,}205 \times (-42{,}0) = -638{,}62\text{ kN}$.<br>
+            2. <strong>Tensão do concreto:</strong> Continua usando $\eta_c = 0{,}9\alpha_c = 0{,}765$ (Seção 10.7.2 da apostila): $N_{Rd,c} = -2{,}732 \times 2450 = -6693{,}40\text{ kN}$.<br>
+            <strong>Total Reta $b$:</strong> $N_{Rd,b} = -6693{,}40 - 638{,}62 = \mathbf{-7332{,}024\text{ kN}}$ | $M_{Rd,b} = \mathbf{0{,}0\text{ kNcm}}$ (simetria total anula o momento).
           </div>
 
           <div class="table-wrap">
@@ -1677,13 +1773,16 @@
         <!-- Passo 4: Polígono Interativo + Semi-Infinito Plano -->
         <div class="step-card amber">
           <div class="step-header">
-            <div class="step-title"><span class="step-num">4</span> Polígono de Segurança e Método do Semi-Infinito Plano da Esquerda (<code>10fcn</code>)</div>
+            <div class="step-title"><span class="step-num">4</span> Leitura do Polígono e Método do Semi-Infinito Plano da Esquerda (<code>10fcn</code>)</div>
             <span class="formula-ref"><button class="code-pill" data-code="10fcn">[10fcn]</button></span>
           </div>
-          <p style="margin:0 0 0.65rem;"><strong>Como funciona o Método do Semi-Infinito Plano da Esquerda?</strong> É um teste geométrico exato (baseado em contagem de cruzamentos / <em>ray casting</em>) para saber se o ponto $P_s = (-2576{,}1\text{ kN};\; -47142{,}63\text{ kNcm})$ está dentro ou fora do polígono fechado. Começamos assumindo que o ponto está <strong>FORA</strong> (<code>Rp = Falsa</code>). Percorremos as 6 arestas no sentido horário (de Reta $a$ até Reta $b$):
-          <br>• <strong>Teste 1 ($A_{Nsd}$):</strong> o momento solicitante $M_{sd}$ está entre $M_{Rd,i}$ e $M_{Rd,j}$? (Se não, o raio horizontal em $M_{sd}$ nem cruza essa aresta).
-          <br>• <strong>Teste 2 ($SI_p$):</strong> o esforço normal $N_{sd}$ está à <em>esquerda</em> ($N_{sd} &lt; N_{\text{lim}}$) do prolongamento da aresta?
-          <br>Sempre que <strong>ambos forem verdadeiros</strong>, o raio horizontal para a direita cruza a fronteira do polígono, então invertemos <code>Rp</code> (Falsa $\leftrightarrow$ Verdadeira). Se ao final das 6 arestas <code>Rp = Verdadeira</code>, o ponto está dentro e o pilar resiste!</p>
+          <p style="margin:0 0 0.55rem;"><strong>Por que o polígono faz uma "barriga" até o Domínio 3–4?</strong> Isso é uma característica física incrível do concreto armado: quando um pilar recebe uma compressão moderada (até cerca de $40\%$ da carga máxima, ponto <code>3–4</code>), a compressão fecha eventuais fissuras e aumenta a área de concreto comprimido sem impedir o aço inferior de escoar — por isso o <em>momento resistente cresce</em> até $77.275\text{ kNcm}$! Passando daí, a seção fica comprimida demais e sobra menos margem para flexão, caindo até $0$ na <code>Reta b</code>.<br><br>
+          <strong>Como funciona o Método do Semi-Infinito Plano da Esquerda (teste matemático para saber se $P_s$ está dentro)?</strong><br>
+          Assumimos no início que $P_s = (-2576{,}1;\, -47142{,}63)$ está <strong>FORA</strong> (<code>Rp = Falsa</code>). Imagine traçar uma linha horizontal na altura $M_{sd} = -47142{,}63$ indo de $P_s$ para a direita (rumo ao infinito positivo). Cada vez que essa linha cruza uma aresta do polígono à direita de $P_s$, ela atravessa a fronteira e alterna nosso estado (Fora $\leftrightarrow$ Dentro). Para verificar se cruza à direita em cada aresta $i \to j$ (sentido horário):<br>
+          • <strong>Teste 1 ($A_{Nsd}$):</strong> $M_{sd}$ está entre $M_{Rd,i}$ e $M_{Rd,j}$? (Ex.: na aresta crítica <code>Dom. 2: 1-2 → 2-3</code>, $(-5148{,}19 &gt; -47142{,}63) \neq (-55064{,}18 &gt; -47142{,}63) \implies \text{Verdadeira} \neq \text{Falsa} \implies \mathbf{A_{Nsd} = \text{Verdadeira}}$).<br>
+          • <strong>Teste 2 ($SI_p$):</strong> calculamos a coordenada $N_{\text{lim}}$ na reta dessa aresta para $M = M_{sd}$ e vemos se $N_{sd} &lt; N_{\text{lim}}$. Na mesma aresta <code>Dom. 2</code>:
+          $$N_{\text{lim}} = (N_{23}-N_{12})\frac{M_{sd}-M_{12}}{M_{23}-M_{12}} + N_{12} = (-1267{,}35 - 482{,}96)\frac{-47142{,}63 + 5148{,}19}{-55064{,}18 + 5148{,}19} + 482{,}96 = -989{,}58\text{ kN}$$
+          Como $N_{sd} = -2576{,}1 &lt; -989{,}58 \implies \mathbf{SI_p = \text{Verdadeira}}$! Como ambos deram Verdadeiro, <code>Rp</code> inverte para <strong>Verdadeira</strong> (entrou no polígono!). Na aresta <code>4a–5</code>, $A_{Nsd}$ é Verdadeira, mas $N_{sd} = -2576{,}1 &gt; -5656{,}47$ ($SI_p$ Falsa — o ponto está à direita dela, não à esquerda!), então <code>Rp</code> não muda e termina <strong>Verdadeira</strong>!</p>
 
           <div class="combo-controls" id="edgeBtns">
             <button class="combo-btn active" data-edge="-1">Polígono Completo</button>
@@ -1753,14 +1852,16 @@
       </div>
 
       <div class="topic-body">
-        <!-- Conceito FCO -->
+        <!-- Conceito FCO: Começando do Zero -->
         <div class="callout callout-info" style="margin-bottom:1.1rem;">
-          <strong>🧠 Conceito Fundamental — Por que na FCO a Linha Neutra inclina e precisamos rotacionar para $(t,n)$?</strong><br>
-          Quando a carga normal $N_{sd}$ atua com excentricidade simultânea em $x$ e $y$, surge um momento resultante inclinado $M_{sd} = \sqrt{M_{sd,x}^2 + M_{sd,y}^2}$. Em seções retangulares ou com armadura assimétrica em relação ao eixo do momento, <strong>o ângulo da linha neutra ($\alpha_{LN}$) NÃO coincide com o ângulo do momento solicitante ($\varphi_s$)</strong> — porque a zona comprimida de concreto muda de forma (vira um triângulo ou trapézio) e desloca o centro de compressão.
-          <div style="margin-top:0.55rem; font-size:0.84rem; display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:0.45rem;">
-            <div style="background:rgba(255,255,255,0.75); padding:0.45rem 0.6rem; border-radius:7px; border:1px solid #bfdbfe;"><strong>1. Por que girar para $(t,n)$?</strong> Ao alinhar o eixo $t$ com a linha neutra inclinada de $\alpha_{LN}$, a deformação volta a variar linearmente em apenas <em>uma</em> direção ($n$), igual à FCN!</div>
-            <div style="background:rgba(255,255,255,0.75); padding:0.45rem 0.6rem; border-radius:7px; border:1px solid #bfdbfe;"><strong>2. Por que usar o Teorema de Green?</strong> A área comprimida inclinada não é mais um retângulo $h_t \cdot y$. Green calcula $A_{cc}, S_{ct}, S_{cn}$ de qualquer triângulo/trapézio somando seus vértices no sentido anti-horário.</div>
-            <div style="background:rgba(255,255,255,0.75); padding:0.45rem 0.6rem; border-radius:7px; border:1px solid #bfdbfe;"><strong>3. Por que fatiar no Plano de $N_{sd}$?</strong> Variar $\alpha_{LN}$ ($0^\circ..90^\circ$) e $x$ gera um <em>poliedro 3D</em>. Cortando-o na altura exata $N_{Rd} = N_{sd}$, obtemos um polígono 2D em $(M_{Rd,x}, M_{Rd,y})$ fácil de verificar!</div>
+          <strong>🧠 Começando do Zero — O que muda da FCN para a FCO?</strong><br>
+          Na FCN (seção anterior), a carga normal estava alinhada em um eixo de simetria, então sabíamos de cara que a Linha Neutra era horizontal. Agora, na <strong>Flexão Composta Oblíqua (FCO)</strong>, a carga $N_{sd} = -850\text{ kN}$ está deslocada nos <strong>dois eixos ao mesmo tempo</strong> ($e_x = 3{,}0\text{ cm}$ e $e_y = 5{,}0\text{ cm}$), empurrando o canto superior direito ($v_1$) da seção e gerando simultaneamente $M_{sd,x} = -4250\text{ kNcm}$ e $M_{sd,y} = +2550\text{ kNcm}$.
+          <br><br>
+          <strong>O grande desafio da FCO (por que tem tanta rotação e conta?):</strong> Quando empurramos um retângulo pela diagonal, <em>a Linha Neutra também inclina</em> para um ângulo $\alpha_{LN}$ desconhecido — e, por causa da geometria retangular ($20 \times 30\text{ cm}$), o ângulo da linha neutra <strong>não é igual</strong> ao ângulo da carga ($\varphi_s = \arctan(3/5) = 30{,}96^\circ$)! Como a forma da área comprimida muda para um triângulo ou trapézio inclinado, precisamos de 3 ferramentas novas:
+          <div style="margin-top:0.6rem; font-size:0.84rem; display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:0.5rem;">
+            <div style="background:rgba(255,255,255,0.82); padding:0.5rem 0.65rem; border-radius:7px; border:1px solid #bfdbfe;"><strong>1. Varredura em $\alpha_{LN}$ + Rotação $(t,n)$:</strong> Como não sabemos $\alpha_{LN}$, testamos 5 ângulos no 1º quadrante ($0^\circ; 22{,}5^\circ; 45^\circ; 67{,}5^\circ; 90^\circ$ — os outros 3 quadrantes são espelhos por simetria). Giramos a seção de $\alpha_{LN}$ para alinhar o eixo $t$ com a LN e deixar o cálculo igual ao da FCN!</div>
+            <div style="background:rgba(255,255,255,0.82); padding:0.5rem 0.65rem; border-radius:7px; border:1px solid #bfdbfe;"><strong>2. Teorema de Green ($A_{cc}, S_{ct}, S_{cn}$):</strong> Como a zona comprimida inclinada vira um triângulo ou trapézio, não existe mais uma fórmula única $h_t \cdot y$. O Teorema de Green calcula área e momentos estáticos de <em>qualquer polígono</em> apenas somando seus vértices no sentido anti-horário!</div>
+            <div style="background:rgba(255,255,255,0.82); padding:0.5rem 0.65rem; border-radius:7px; border:1px solid #bfdbfe;"><strong>3. Poliedro 3D $\to$ Plano de $N_{sd}$ (2D):</strong> Em 3D temos $(N_{Rd}, M_{Rd,x}, M_{Rd,y})$. Para verificar nossa carga fixa $N_{sd}=-850\text{ kN}$, "fatiamos" o poliedro na altura exata $-850\text{ kN}$ (interpolando $I_0..I_{90}$) e testamos o ponto $(M_{sd,x}, M_{sd,y})$ em 2D!</div>
           </div>
         </div>
 
@@ -1770,19 +1871,19 @@
           <div class="roteiro-flow">
             <div class="roteiro-step">
               <strong class="r-tag">1fco–5fco • Geometria &amp; (x,y)</strong>
-              Confira dimensões, armaduras e momento mínimo. Liste todos os vértices $v_i$ e barras $b_j$ no sistema $(x,y)$ com origem no centroide.
+              Confira dimensões, armaduras e momento mínimo. Liste os 4 vértices $v_i$ (anti-horário!) e as 8 barras $b_j$ em $(x,y)$ com origem no CG.
             </div>
             <div class="roteiro-step">
-              <strong class="r-tag">6fco–12fco • Rotação &amp; Green</strong>
-              Para cada $\alpha_{LN}$ ($0^\circ$ a $90^\circ$), rotacione p/ $(t,n)$, ache $h_n, d_n, x, y$, intercepte $n_I = n_t - y$ nas arestas e aplique Green ($A_{cc}, S_{ct}, S_{cn}$) no sentido anti-horário.
+              <strong class="r-tag">6fco–13fco • Rotação &amp; Green</strong>
+              Para cada $\alpha_{LN}$ ($0^\circ$ a $90^\circ$), rotacione p/ $(t,n)$, ache $h_n, d_n, x, y$, intercepte $n_I = n_t - y$ nas arestas e aplique Green ($A_{cc}, S_{ct}, S_{cn}$).
             </div>
             <div class="roteiro-step">
-              <strong class="r-tag">13fco–17fco • Aço, Sinal &amp; (x,y)</strong>
+              <strong class="r-tag">14fco–17fco • Aço, Sinal &amp; (x,y)</strong>
               Calcule $\varepsilon_{si}, \sigma_{si}$, some concreto + aço lembrando de <strong>trocar o sinal</strong> de $M_{Rd,n}$ <button class="code-pill" data-code="10.31">[10.31]</button> e rotacione de volta $(M_{Rd,t}, M_{Rd,n}) \to (M_{Rd,x}, M_{Rd,y})$.
             </div>
             <div class="roteiro-step">
               <strong class="r-tag">18fco–20fco • Plano de Nsd</strong>
-              Para cada $\alpha_{LN}$, identifique as interfaces que cercam $N_{sd}$, interpole $I_{\alpha_{LN}} = (I_{\alpha,x}; I_{\alpha,y})$ <button class="code-pill" data-code="10.41">[10.41]</button> e faça o semi-infinito plano em 2D.
+              Para cada $\alpha_{LN}$, pegue o par de interfaces que cerca $N_{sd}$, interpole $I_{\alpha_{LN}} = (I_{\alpha,x}; I_{\alpha,y})$ <button class="code-pill" data-code="10.41">[10.41]</button> e faça o semi-infinito plano em 2D.
             </div>
           </div>
         </div>
@@ -1819,10 +1920,9 @@
               </marker>
             </defs>
 
-            <!-- LEFT: Sistema Original (x,y) | scale 6 px/cm | center (180, 165) -->
+            <!-- LEFT: Sistema Original (x,y) -->
             <rect x="20" y="14" width="350" height="292" rx="12" fill="#f8fafc" stroke="#cbd5e1"/>
             <text x="195" y="36" text-anchor="middle" font-size="12.5" font-weight="800" fill="#1d4ed8">1. Sistema Original (x, y)</text>
-            <!-- Section 20x30 -> 120x180 px -> x:[120,240], y:[75,255] -->
             <rect x="120" y="75" width="120" height="180" fill="#fff" stroke="#0f172a" stroke-width="2"/>
             <rect x="132" y="87" width="96" height="156" rx="3" fill="none" stroke="#d97706" stroke-width="1.6"/>
             <line x1="75" y1="165" x2="310" y2="165" stroke="#0f172a" stroke-width="1.2" marker-end="url(#arr-fco)"/>
@@ -1830,13 +1930,11 @@
             <line x1="180" y1="280" x2="180" y2="52" stroke="#0f172a" stroke-width="1.2" marker-end="url(#arr-fco)"/>
             <text x="187" y="58" font-size="11.5" font-weight="800" fill="#0f172a">y</text>
 
-            <!-- Vertices labels -->
             <text x="245" y="73" font-size="10" font-weight="700" fill="#475569">v₁(10;15)</text>
             <text x="115" y="73" text-anchor="end" font-size="10" font-weight="700" fill="#475569">v₂(-10;15)</text>
             <text x="115" y="267" text-anchor="end" font-size="10" font-weight="700" fill="#475569">v₃(-10;-15)</text>
             <text x="245" y="267" font-size="10" font-weight="700" fill="#475569">v₄(10;-15)</text>
 
-            <!-- 8 Bars (d'=4cm -> 24px from edge -> x: 144, 180, 216; y: 99, 165, 231) -->
             <circle cx="216" cy="99" r="4.5" fill="#16a34a" stroke="#0f172a" stroke-width="1"/>
             <circle cx="180" cy="99" r="4.5" fill="#16a34a" stroke="#0f172a" stroke-width="1"/>
             <circle cx="144" cy="99" r="4.5" fill="#16a34a" stroke="#0f172a" stroke-width="1"/>
@@ -1846,7 +1944,6 @@
             <circle cx="216" cy="231" r="4.5" fill="#16a34a" stroke="#0f172a" stroke-width="1"/>
             <circle cx="216" cy="165" r="4.5" fill="#16a34a" stroke="#0f172a" stroke-width="1"/>
 
-            <!-- Bar labels -->
             <text x="223" y="96" font-size="9.5" font-weight="800" fill="#0f766e">b₁</text>
             <text x="187" y="94" font-size="9.5" font-weight="800" fill="#0f766e">b₂</text>
             <text x="131" y="96" font-size="9.5" font-weight="800" fill="#0f766e">b₃</text>
@@ -1856,35 +1953,26 @@
             <text x="223" y="236" font-size="9.5" font-weight="800" fill="#0f766e">b₇</text>
             <text x="223" y="160" font-size="9.5" font-weight="800" fill="#0f766e">b₈</text>
 
-            <!-- Nsd at (+3, +5) -> (180+18, 165-30) = (198, 135) -->
             <circle cx="198" cy="135" r="5" fill="#dc2626" stroke="#fff" stroke-width="1.4"/>
             <text x="206" y="132" font-size="10.5" font-weight="800" fill="#dc2626">Nsd (3; 5)</text>
             <text x="195" y="294" text-anchor="middle" font-size="10.5" font-weight="700" fill="#334155">hx = 20 cm | hy = 30 cm | d' = 4,0 cm</text>
 
-            <!-- RIGHT: Sistema Rotacionado αLN = 45° (t,n) | scale 6 px/cm | center (635, 165) -->
-            <!-- V1(-3.536, 17.678)->(613.8, 58.9), V2(-17.678, 3.536)->(528.9, 143.8), V3(3.536, -17.678)->(656.2, 271.1), V4(17.678, -3.536)->(741.1, 186.2) -->
-            <!-- A3(-16.890, 2.748)->(533.7, 148.5), A4(11.394, 2.748)->(703.4, 148.5) -->
+            <!-- RIGHT: Sistema Rotacionado αLN = 45° (t,n) -->
             <rect x="400" y="14" width="460" height="292" rx="12" fill="#f8fafc" stroke="#cbd5e1"/>
             <text x="630" y="36" text-anchor="middle" font-size="12.5" font-weight="800" fill="#0f766e">2. Seção Rotacionada em αLN = 45° (Sistema t, n — Interface 3–4)</text>
 
-            <!-- Compressed concrete polygon A1 A2 A3 A4 -->
             <polygon points="613.8,58.9 528.9,143.8 533.7,148.5 703.4,148.5" fill="#3b82f6" fill-opacity="0.22"/>
-            <!-- Full rotated section -->
             <polygon points="613.8,58.9 528.9,143.8 656.2,271.1 741.1,186.2" fill="none" stroke="#0f172a" stroke-width="2"/>
-            <!-- Axes t and n -->
             <line x1="470" y1="165" x2="800" y2="165" stroke="#0f172a" stroke-width="1.2" marker-end="url(#arr-fco)"/>
             <text x="806" y="169" font-size="11.5" font-weight="800" fill="#0f172a">t</text>
             <line x1="635" y1="286" x2="635" y2="46" stroke="#0f172a" stroke-width="1.2" marker-end="url(#arr-fco)"/>
             <text x="642" y="53" font-size="11.5" font-weight="800" fill="#0f172a">n (+)</text>
 
-            <!-- Compression limit line y=14.93 (nI = 2.748 -> y=148.5) -->
             <line x1="490" y1="148.5" x2="775" y2="148.5" stroke="#2563eb" stroke-width="2"/>
             <text x="772" y="143" text-anchor="end" font-size="10" font-weight="800" fill="#1d4ed8">Reta limite y (nI = 2,748)</text>
-            <!-- Neutral axis x3-4 = 18.662 (nLN = 17.678 - 18.662 = -0.984 -> y=170.9) -->
             <line x1="490" y1="170.9" x2="775" y2="170.9" stroke="#dc2626" stroke-width="1.6" stroke-dasharray="5,3"/>
             <text x="772" y="183" text-anchor="end" font-size="10" font-weight="800" fill="#dc2626">Linha Neutra x₃₋₄ = 18,662 cm</text>
 
-            <!-- Vertices A1..A4 -->
             <circle cx="613.8" cy="58.9" r="3.5" fill="#1d4ed8"/>
             <text x="613.8" y="51" text-anchor="middle" font-size="10" font-weight="800" fill="#1d4ed8">A₁=V₁</text>
             <circle cx="528.9" cy="143.8" r="3.5" fill="#1d4ed8"/>
@@ -1904,10 +1992,12 @@
         <!-- Passo 1 -->
         <div class="step-card">
           <div class="step-header">
-            <div class="step-title"><span class="step-num">1</span> Dados Preliminares, Disposições Construtivas e Coordenadas $(x, y)$ (<code>1fco–5fco</code>)</div>
+            <div class="step-title"><span class="step-num">1</span> Materiais, Disposições Construtivas e Mapa de Coordenadas $(x, y)$ (<code>1fco–5fco</code>)</div>
             <span class="formula-ref"><button class="code-pill" data-code="10.21">[10.21]</button> <button class="code-pill" data-code="10.11">[10.11]</button></span>
           </div>
-          <div class="grid-2" style="margin-bottom:0.6rem;">
+          <p style="margin:0 0 0.55rem; font-size:0.87rem; color:#334155;"><strong>O que fazemos antes de girar qualquer eixo?</strong> Primeiro conferimos se o pilar atende às exigências básicas da NBR 6118 (dimensão mínima, taxa de aço, bitola e momento mínimo). Depois, colocamos a origem $(0;0)$ no centroide da seção e anotamos as coordenadas $(x, y)$ dos $4$ vértices e das $8$ barras. <strong>Regra de ouro:</strong> numere os vértices $v_1 \to v_2 \to v_3 \to v_4$ sempre no <strong>sentido anti-horário</strong>, pois o Teorema de Green só dá área positiva nesse sentido!<br>
+          <strong>Por que $M_{sd,x}$ é negativo e $M_{sd,y}$ é positivo?</strong> Pela <em>regra da mão direita</em>: a carga de compressão ($N_{sd} = -850\text{ kN}$, entrando na tela) em $e_y = +5\text{ cm}$ gira no sentido negativo do eixo $x$ ($M_{sd,x} = -850\times 5 = -4250\text{ kNcm}$), enquanto em $e_x = +3\text{ cm}$ gira no sentido positivo do eixo $y$ ($M_{sd,y} = +850\times 3 = +2550\text{ kNcm}$).</p>
+          <div class="grid-2" style="margin-bottom:0.4rem;">
             <div>
               <p style="margin:0 0 0.35rem;"><strong>Constantes dos Materiais e Solicitações:</strong></p>
               <div class="formula-row">
@@ -1915,13 +2005,13 @@
                 $$\sigma_c = -\eta_c f_{cd} = -1{,}913\text{ kN/cm}^2 \quad \zeta_c = 0{,}8$$
                 $$f_{yd} = \frac{50}{1{,}15} = 43{,}478\text{ kN/cm}^2 \quad \varepsilon_{yd} = 2{,}070\text{‰}$$
                 $$A_s = 8\frac{\pi\cdot 2{,}0^2}{4} = 25{,}133\text{ cm}^2 \quad \left(\frac{A_s}{b_s} = 3{,}142\text{ cm}^2/\text{barra}\right)$$
-                $$M_{sd,x} = -850 \times 5{,}0 = -4250{,}0\text{ kNcm} \quad M_{sd,y} = +850 \times 3{,}0 = +2550{,}0\text{ kNcm}$$</div>
+                $$M_{sd,x} = -4250{,}0\text{ kNcm} \qquad M_{sd,y} = +2550{,}0\text{ kNcm}$$</div>
               </div>
             </div>
             <div>
-              <p style="margin:0 0 0.35rem;"><strong>Verificações Normativas e Coordenadas $(x, y)$ ($d' = 4{,}0\text{ cm}$):</strong></p>
+              <p style="margin:0 0 0.35rem;"><strong>Verificações Normativas e Coordenadas ($d' = 2{,}5+0{,}5+1{,}0 = 4{,}0\text{ cm}$):</strong></p>
               <div class="formula-row">
-                <div class="formula-math">$$h_{\min} = 20{,}0\text{ cm} &gt; 19\text{ cm}\;\checkmark \qquad A_{s,\min} = 2{,}93 &lt; 25{,}133 &lt; A_{s,\max} = 48{,}0\text{ cm}^2\;\checkmark$$
+                <div class="formula-math">$$h_{\min} = 20{,}0 &gt; 19\text{ cm}\;\checkmark \qquad A_{s,\min} = 2{,}93 &lt; 25{,}133 &lt; A_{s,\max} = 48{,}0\text{ cm}^2\;\checkmark$$
                 $$M_{sd,\min,x} = 850(0{,}015+0{,}03\times 0{,}30)\cdot 100 = 2040{,}0 &lt; 4250{,}0\text{ kNcm}\;\checkmark$$
                 $$M_{sd,\min,y} = 850(0{,}015+0{,}03\times 0{,}20)\cdot 100 = 1785{,}0 &lt; 2550{,}0\text{ kNcm}\;\checkmark$$
                 $$\text{Vértices: } v_1(10;15),\; v_2(-10;15),\; v_3(-10;-15),\; v_4(10;-15)$$
@@ -1934,37 +2024,58 @@
         <!-- Passo 2 -->
         <div class="step-card teal">
           <div class="step-header">
-            <div class="step-title"><span class="step-num">2</span> Execução do Loop para $\alpha_{LN} = 45{,}0^\circ$ na Interface <code>3–4</code> (<code>6fco–17fco</code>)</div>
-            <span class="formula-ref"><button class="code-pill" data-code="10.rot">[10.rot]</button> <button class="code-pill" data-code="10.24">[10.24]</button> <button class="code-pill" data-code="10.26">[10.26]</button> <button class="code-pill" data-code="10.31">[10.31]</button> <button class="code-pill" data-code="10.19">[10.19]</button></span>
+            <div class="step-title"><span class="step-num">2</span> Rotação $(x,y) \to (t,n)$ e Dimensões Efetivas para $\alpha_{LN} = 45{,}0^\circ$ (<code>6fco–8fco</code>)</div>
+            <span class="formula-ref"><button class="code-pill" data-code="10.rot">[10.rot]</button></span>
           </div>
-          <p style="margin:0 0 0.55rem;"><strong>Por que testamos vários ângulos $\alpha_{LN}$?</strong> Como não sabemos de antemão qual inclinação da linha neutra equilibra a seção, varremos o 1º quadrante em 5 ângulos: $\alpha_{LN} \in \{0^\circ;\, 22{,}5^\circ;\, 45^\circ;\, 67{,}5^\circ;\, 90^\circ\}$ (em seções duplamente simétricas, os outros 3 quadrantes são espelhos idênticos). Em $0^\circ$ e $90^\circ$, a linha neutra é paralela aos lados (caso particular de FCN); nos ângulos inclinados, surge momento resistente também em $n$ ($M_{Rd,n} \neq 0$). Abaixo detalhamos passo a passo o caso inclinado <strong>$\alpha_{LN} = 45{,}0^\circ$ na interface 3–4</strong>:</p>
-
-          <div class="grid-2">
-            <div class="card-box">
-              <h4>2A. Rotação $(x,y) \to (t,n)$ e Posição da LN</h4>
-              <p style="margin:0 0 0.4rem; font-size:0.83rem;">Aplicando $t = x\cos 45^\circ - y\operatorname{sen} 45^\circ$ e $n = x\operatorname{sen} 45^\circ + y\cos 45^\circ$:</p>
-              <div class="formula-row">
-                <div class="formula-math">$$V_1(-3{,}536;\, 17{,}678) \quad V_2(-17{,}678;\, 3{,}536)$$
-                $$V_3(3{,}536;\, -17{,}678) \quad V_4(17{,}678;\, -3{,}536)$$
-                $$h_n = |17{,}678| + |-17{,}678| = 35{,}356\text{ cm} \quad (n_t = 17{,}678\text{ cm})$$
-                $$d_n = \max(n_t - n_{bi}) = 17{,}678 - (-12{,}021) = 29{,}699\text{ cm (barra } b_5\text{)}$$
-                $$x_{3-4} = 29{,}699\frac{3{,}5}{3{,}5+2{,}07} = 18{,}662\text{ cm} \implies y_{3-4} = 0{,}8(18{,}662) = 14{,}930\text{ cm}$$</div>
-              </div>
-            </div>
-
-            <div class="card-box">
-              <h4>2B. Reta Limite do Concreto e Teorema de Green</h4>
-              <p style="margin:0 0 0.4rem; font-size:0.83rem;">A cota da reta limite vale $n_I = n_t - y = 17{,}678 - 14{,}930 = \mathbf{2{,}748\text{ cm}}$ (nota: na p. 309 do Caderno aparece impresso $9{,}607$ nessa linha, mas as contas seguintes do próprio Caderno usam $2{,}748$). Interceptando as arestas $V_2\to V_3$ e $V_4\to V_1$ pela Eq. <button class="code-pill" data-code="10.24">[10.24]</button>:</p>
-              <div class="formula-row">
-                <div class="formula-math">$$t_{I,23} = -17{,}678 + (2{,}748 - 3{,}536)\frac{3{,}536+17{,}678}{-17{,}678-3{,}536} = -16{,}890\text{ cm}$$
-                $$t_{I,41} = 17{,}678 + (2{,}748 + 3{,}536)\frac{-3{,}536-17{,}678}{17{,}678+3{,}536} = +11{,}394\text{ cm}$$
-                $$A_{cc} = 222{,}284\text{ cm}^2 \quad S_{ct} = 1719{,}997\text{ cm}^3 \quad S_{cn} = -777{,}215\text{ cm}^3$$
-                $$N_{Rd,c} = -425{,}229\text{ kN} \quad M_{Rd,tc} = -3290{,}354\text{ kNcm} \quad M_{Rd,nc} = +1486{,}812\text{ kNcm}$$</div>
-              </div>
-            </div>
+          <p style="margin:0 0 0.5rem;"><strong>Por que rotacionamos as coordenadas?</strong> Ao adotar uma inclinação de linha neutra $\alpha_{LN} = 45^\circ$, giramos o sistema de referência de modo que a linha neutra fique paralela ao novo eixo horizontal $t$. Assim, todas as fibras com mesma cota $n$ têm exatamente a mesma deformação! As equações de rotação são:
+          $$t = x\cos(\alpha_{LN}) - y\operatorname{sen}(\alpha_{LN}) \qquad n = x\operatorname{sen}(\alpha_{LN}) + y\cos(\alpha_{LN})$$
+          <strong>Exemplo numérico passo a passo (Vértice $v_1$ e Barra $b_5$ para $\alpha_{LN} = 45^\circ$, com $\cos 45^\circ = \operatorname{sen} 45^\circ = 0{,}70711$):</strong></p>
+          <div class="formula-row">
+            <div class="formula-math">$$v_1(10;15):\quad t_1 = 10(0{,}70711) - 15(0{,}70711) = -3{,}536\text{ cm} \qquad n_1 = 10(0{,}70711) + 15(0{,}70711) = +17{,}678\text{ cm}$$
+            $$b_5(-6;-11):\quad t_{b5} = -6(0{,}70711) - (-11)(0{,}70711) = +3{,}536\text{ cm} \qquad n_{b5} = -6(0{,}70711) + (-11)(0{,}70711) = -12{,}021\text{ cm}$$</div>
           </div>
+          <p style="margin:0.45rem 0;">Repetindo para os 4 vértices: $V_1(-3{,}536;\, 17{,}678)$, $V_2(-17{,}678;\, 3{,}536)$, $V_3(3{,}536;\, -17{,}678)$, $V_4(17{,}678;\, -3{,}536)$. Agora extraímos as medidas na nova direção vertical $n$:</p>
+          <div class="formula-row">
+            <div class="formula-math">$$\text{Cota do topo (fibra + compr.): } n_t = \max(n_{vi}) = +17{,}678\text{ cm (vértice } V_1\text{)}$$
+            $$\text{Altura total da seção: } h_n = |\max(n_{vi})| + |\min(n_{vi})| = |17{,}678| + |-17{,}678| = 35{,}356\text{ cm}$$
+            $$\text{Altura útil: } d_n = \max(n_t - n_{bi}) = 17{,}678 - (-12{,}021) = 29{,}699\text{ cm (barra mais tracionada } b_5\text{)}$$</div>
+          </div>
+        </div>
 
-          <p style="margin:0.3rem 0 0.4rem; font-weight:700; font-size:0.88rem;">2C. Deformações e Tensões nas 8 Barras ($\varepsilon_c = -3{,}5\text{‰}$, $\varepsilon_s = +2{,}07\text{‰}$ na interface 3–4):</p>
+        <!-- Passo 3 -->
+        <div class="step-card">
+          <div class="step-header">
+            <div class="step-title"><span class="step-num">3</span> Área Comprimida Inclinada e Teorema de Green (Interface <code>3–4</code> em $45^\circ$, <code>9fco–13fco</code>)</div>
+            <span class="formula-ref"><button class="code-pill" data-code="10.24">[10.24]</button> <button class="code-pill" data-code="10.26">[10.26]</button></span>
+          </div>
+          <p style="margin:0 0 0.5rem;"><strong>1. Onde passa a reta limite do concreto comprimido ($n_I$)?</strong><br>
+          Na interface <code>3–4</code> ($\varepsilon_c = -3{,}5\text{‰}$, $\varepsilon_s = +2{,}07\text{‰}$), calculamos $x_{3-4} = 29{,}699\frac{3{,}5}{3{,}5+2{,}07} = 18{,}662\text{ cm}$ e a altura do bloco retangular comprimido $y_{3-4} = 0{,}8\times 18{,}662 = 14{,}930\text{ cm}$. Como o bloco comprimido desce $y$ a partir do topo $n_t$, a linha horizontal que o limita está na cota:
+          $$n_I = n_t - y = 17{,}678 - 14{,}930 = \mathbf{2{,}748\text{ cm}}$$
+          <em>(Nota: na p. 309 do Caderno aparece impresso <code>9,607</code> por erro de digitação nessa linha, mas todas as contas seguintes do próprio Caderno usam corretamente <code>2,748</code>.)</em></p>
+
+          <p style="margin:0 0 0.45rem;"><strong>2. Quais arestas do retângulo são cortadas por $n_I = 2{,}748\text{ cm}$?</strong><br>
+          • $V_1 \to V_2$ ($n$ vai de $17{,}678$ a $3{,}536$): toda <strong>acima</strong> de $2{,}748 \implies$ entra inteira no concreto comprimido.<br>
+          • $V_2 \to V_3$ ($n$ vai de $3{,}536$ a $-17{,}678$): <strong>cruza</strong> $2{,}748$! Aplicando a Eq. <button class="code-pill" data-code="10.24">[10.24]</button>: $t_I = -17{,}678 + (2{,}748 - 3{,}536)\frac{3{,}536+17{,}678}{-17{,}678-3{,}536} = \mathbf{-16{,}890\text{ cm}} \implies A_3(-16{,}890;\, 2{,}748)$.<br>
+          • $V_3 \to V_4$ ($n$ vai de $-17{,}678$ a $-3{,}536$): toda <strong>abaixo</strong> de $2{,}748$ (região tracionada, desprezada).<br>
+          • $V_4 \to V_1$ ($n$ vai de $-3{,}536$ a $17{,}678$): <strong>cruza</strong> $2{,}748$! Pela Eq. <button class="code-pill" data-code="10.24">[10.24]</button>: $t_I = 17{,}678 + (2{,}748 + 3{,}536)\frac{-3{,}536-17{,}678}{17{,}678+3{,}536} = \mathbf{+11{,}394\text{ cm}} \implies A_4(+11{,}394;\, 2{,}748)$.</p>
+
+          <p style="margin:0 0 0.4rem;"><strong>3. Aplicando o Teorema de Green no trapézio anti-horário $A_1(-3{,}536;\,17{,}678) \to A_2(-17{,}678;\,3{,}536) \to A_3(-16{,}890;\,2{,}748) \to A_4(11{,}394;\,2{,}748) \to A_1$:</strong></p>
+          <div class="formula-row">
+            <div class="formula-math">$$A_{cc} = \frac{1}{2}\Big[(-17{,}678-3{,}536)(3{,}536-17{,}678) + (-16{,}890-17{,}678)(2{,}748-3{,}536) + (11{,}394-16{,}890)(2{,}748-2{,}748) + (-3{,}536+11{,}394)(17{,}678-2{,}748)\Big] = \mathbf{222{,}284\text{ cm}^2}$$
+            $$S_{ct} = +1719{,}997\text{ cm}^3 \text{ (centroide acima do CG, } n&gt;0\text{)} \qquad S_{cn} = -777{,}215\text{ cm}^3 \text{ (trapézio deslocado p/ esq., } t&lt;0\text{)}$$
+            $$N_{Rd,c} = \sigma_c A_{cc} = -425{,}229\text{ kN} \qquad M_{Rd,tc} = \sigma_c S_{ct} = -3290{,}354\text{ kNcm} \qquad M_{Rd,nc} = \sigma_c S_{cn} = (-1{,}913)(-777{,}215) = +1486{,}812\text{ kNcm}$$</div>
+          </div>
+        </div>
+
+        <!-- Passo 4 -->
+        <div class="step-card purple">
+          <div class="step-header">
+            <div class="step-title"><span class="step-num">4</span> Tensões nas 8 Barras, Sinal de $M_{Rd,n}$ e Volta para $(x, y)$ (<code>14fco–17fco</code>)</div>
+            <span class="formula-ref"><button class="code-pill" data-code="10.22">[10.22]</button> <button class="code-pill" data-code="10.31">[10.31]</button> <button class="code-pill" data-code="10.19">[10.19]</button></span>
+          </div>
+          <p style="margin:0 0 0.5rem;"><strong>1. Deformação e tensão barra por barra:</strong> Usamos a mesma fórmula da FCN, agora com $d_{ni} = n_t - n_{bi}$ e $d_n = 29{,}699\text{ cm}$. Veja 2 exemplos abertos ($\varepsilon_c = -3{,}5\text{‰}$, $\varepsilon_s = +2{,}07\text{‰}$):<br>
+          • <strong>Barra $b_1$</strong> ($d_{n1} = 17{,}678 - 12{,}021 = 5{,}657\text{ cm}$): $\varepsilon_{s1} = (2{,}07+3{,}5)\frac{5{,}657}{29{,}699} - 3{,}5 = -2{,}439\text{‰} \implies \sigma = 21(-2{,}439) = -51{,}22 \implies \mathbf{-43{,}478\text{ kN/cm}^2}$ (escoou à compressão!).<br>
+          • <strong>Barra $b_4$</strong> ($d_{n4} = 17{,}678 - (-4{,}243) = 21{,}921\text{ cm}$): $\varepsilon_{s4} = (2{,}07+3{,}5)\frac{21{,}921}{29{,}699} - 3{,}5 = +0{,}611\text{‰} \implies \sigma = 21(0{,}611) = \mathbf{+12{,}831\text{ kN/cm}^2}$ (regime elástico à tração!).</p>
           <div class="table-wrap">
             <table>
               <thead>
@@ -1992,28 +2103,31 @@
             </table>
           </div>
 
+          <p style="margin:0 0 0.45rem;"><strong>2. Por que trocamos o sinal de $M_{Rd,n}$ (Eq. 10.31) e voltamos para $(x,y)$ (Eq. 10.19)?</strong><br>
+          Quando a seção está inclinada a $45^\circ$, a resultante comprimida não está alinhada com o eixo $n$ (ela está deslocada para a esquerda, $t &lt; 0$). Isso cria um momento "parasita" em torno de $n$ ($M_{Rd,n} \neq 0$). Pela <em>regra da mão direita</em>, uma força de compressão em $t &gt; 0$ gera um momento positivo em $n$ e negativo em $t$; portanto, para manter os dois momentos compatibilizados na mesma convenção antes de rodar de volta, a apostila troca o sinal de $M_{Rd,n}$ na Eq. <button class="code-pill" data-code="10.31">[10.31]</button> ($M_{Rd,n} = -M_{Rd,nc} - M_{Rd,ns}$). Depois, giramos o vetor $(M_{Rd,t};\, M_{Rd,n})$ de volta para os eixos originais $(x, y)$:</p>
           <div class="formula-row">
-            <div class="formula-math">
-              <strong>2D. Soma das Parcelas (atenção ao sinal trocado de $M_{Rd,n}$ na Eq. 10.31!) e Retorno para $(x,y)$:</strong>
-              $$N_{Rd,s} = 3{,}142(-23{,}255) = -73{,}058\text{ kN} \implies N_{Rd,45,3-4} = -425{,}229 - 73{,}058 = \mathbf{-498{,}287\text{ kN}}$$
-              $$M_{Rd,t} = -3290{,}354 - 5535{,}416 = -8825{,}770\text{ kNcm} \qquad M_{Rd,n} = -1486{,}812 - 3069{,}780 = -4556{,}592\text{ kNcm}$$
-              $$M_{Rd,x,45,3-4} = -8825{,}77\cos 45^\circ - (-4556{,}592)\operatorname{sen} 45^\circ = \mathbf{-9462{,}759\text{ kNcm}}$$
-              $$M_{Rd,y,45,3-4} = -8825{,}77\operatorname{sen} 45^\circ + (-4556{,}592)\cos 45^\circ \text{ (ou } -M_{Rd,t}\operatorname{sen}\alpha + M_{Rd,n}\cos\alpha\text{)} \implies \mathbf{+3018{,}765\text{ kNcm}}$$
-            </div>
+            <div class="formula-math">$$N_{Rd,s} = 3{,}142(-23{,}255) = -73{,}058\text{ kN} \implies N_{Rd,45,3-4} = -425{,}229 - 73{,}058 = \mathbf{-498{,}287\text{ kN}}$$
+            $$M_{Rd,t} = -3290{,}354 - 5535{,}416 = -8825{,}770\text{ kNcm} \qquad M_{Rd,n} = -1486{,}812 - 3069{,}780 = -4556{,}592\text{ kNcm}$$
+            $$M_{Rd,x} = M_{Rd,t}\cos 45^\circ + M_{Rd,n}\operatorname{sen} 45^\circ = (-8825{,}77)(0{,}70711) + (-4556{,}592)(0{,}70711) = \mathbf{-9462{,}759\text{ kNcm}}$$
+            $$M_{Rd,y} = -M_{Rd,t}\operatorname{sen} 45^\circ + M_{Rd,n}\cos 45^\circ = -(-8825{,}77)(0{,}70711) + (-4556{,}592)(0{,}70711) = \mathbf{+3018{,}765\text{ kNcm}}$$</div>
           </div>
           <div class="callout callout-info" style="margin-bottom:0;">
-            <strong>💡 Por que o sinal de $M_{Rd,y}$ ficou positivo ($+3018{,}765$) na Eq. do Caderno (p. 312)?</strong> Na Eq. <button class="code-pill" data-code="10.19">[10.19]</button> da apostila ($M_{Rd,y} = -M_{Rd,t}\operatorname{sen}\alpha + M_{Rd,n}\cos\alpha$), se você substitui $-8825{,}77$ e $-4556{,}592$, obtém $-(-8825{,}77)(0{,}7071) + (-4556{,}592)(0{,}7071) = +3018{,}765\text{ kNcm}$ (exatamente o resultado da p. 312!). O importante é usar a mesma convenção da Eq. <button class="code-pill" data-code="10.19">[10.19]</button> com os sinais de $M_{Rd,t}$ e $M_{Rd,n}$ dados por <button class="code-pill" data-code="10.31">[10.31]</button>.
+            <strong>💡 Dica de prova:</strong> No Caderno (p. 312), a equação impressa mostra sinais trocados no texto, mas o valor final calculado é exatamente <strong>$M_{Rd,x} = -9462{,}759\text{ kNcm}$</strong> e <strong>$M_{Rd,y} = +3018{,}765\text{ kNcm}$</strong>, que vêm diretamente das Eqs. <button class="code-pill" data-code="10.19">[10.19]</button> e <button class="code-pill" data-code="10.31">[10.31]</button> mostradas acima!
           </div>
         </div>
 
-        <!-- Passo 3 -->
-        <div class="step-card purple">
+        <!-- Passo 5 -->
+        <div class="step-card teal">
           <div class="step-header">
-            <div class="step-title"><span class="step-num">3</span> Corte no Plano de $N_{sd} = -850{,}0\text{ kN}$ em Todos os 5 Ângulos (<code>18fco–19fco</code>)</div>
+            <div class="step-title"><span class="step-num">5</span> Fatiando o Poliedro 3D no Plano de $N_{sd} = -850{,}0\text{ kN}$ (<code>18fco–19fco</code>)</div>
             <span class="formula-ref"><button class="code-pill" data-code="10.41">[10.41]</button></span>
           </div>
-          <p style="margin:0 0 0.5rem;"><strong>Por que fazemos esse corte (Plano de $N_{sd}$)?</strong> Na etapa anterior calculamos pontos em 3D $(N_{Rd}; M_{Rd,x}; M_{Rd,y})$, mas cada ângulo $\alpha_{LN}$ gera valores diferentes de $N_{Rd}$ nas interfaces. Como a nossa carga aplicada é fixa ($N_{sd} = -850{,}0\text{ kN}$), precisamos descobrir quais pares $(M_{Rd,x}, M_{Rd,y})$ o pilar resiste <em>exatamente</em> nesse nível de compressão.<br>
-          Inspecionando os pontos calculados para os 5 ângulos, vemos que <strong>$N_{sd} = -850{,}0\text{ kN}$ está sempre no Domínio 4</strong> (entre as interfaces <code>3–4</code> e <code>4–4a</code>). Assim, basta interpolar linearmente entre esses dois pontos usando a Eq. <button class="code-pill" data-code="10.41">[10.41]</button>:</p>
+          <p style="margin:0 0 0.5rem;"><strong>Por que fazemos esse corte e qual o atalho que economiza contas?</strong><br>
+          Cada ângulo $\alpha_{LN}$ tem 7 interfaces de domínio, formando uma superfície em 3D $(N_{Rd}, M_{Rd,x}, M_{Rd,y})$. Porém, na prática (Seção 10.8.2 da apostila, p. 190), não precisamos calcular todas as 35 combinações se soubermos em que faixa está a nossa carga $N_{sd} = -850{,}0\text{ kN}$: basta pegar, para cada ângulo, o ponto imediatamente <em>menos comprimido</em> ($N_{Rd,a} &gt; -850$) e o imediatamente <em>mais comprimido</em> ($N_{Rd,p} &lt; -850$). Aqui, em todos os 5 ângulos, $N_{sd} = -850{,}0\text{ kN}$ cai exatamente no <strong>Domínio 4</strong> (entre <code>3–4</code> e <code>4–4a</code>)!<br><br>
+          <strong>Conta aberta da interpolação para $\alpha_{LN} = 45^\circ$ (Eq. 10.41):</strong> Entre $-498{,}287\text{ kN}$ e $-1570{,}597\text{ kN}$, a carga $-850{,}0\text{ kN}$ está na fração:
+          $$f = \frac{|-850{,}0 - (-498{,}287)|}{|-1570{,}597 - (-498{,}287)|} = \frac{351{,}713}{1072{,}310} = 0{,}3280 \text{ (32,8\% do caminho de 3–4 para 4–4a!)}$$
+          $$I_{45,x} = -9462{,}759 + 0{,}3280(-5699{,}567 - (-9462{,}759)) = \mathbf{-8228{,}448\text{ kNcm}}$$
+          $$I_{45,y} = 3018{,}765 + 0{,}3280(2051{,}930 - 3018{,}765) = \mathbf{+2701{,}647\text{ kNcm}}$$</p>
           <div class="table-wrap" style="margin-bottom:0;">
             <table>
               <thead>
@@ -2036,13 +2150,15 @@
           </div>
         </div>
 
-        <!-- Passo 4: Polígono Interativo FCO -->
+        <!-- Passo 6: Polígono Interativo FCO -->
         <div class="step-card amber">
           <div class="step-header">
-            <div class="step-title"><span class="step-num">4</span> Polígono no Plano de $N_{sd}$ e Semi-Infinito Plano da Esquerda (<code>20fco</code>)</div>
+            <div class="step-title"><span class="step-num">6</span> Verificação 2D no Plano de $N_{sd}$ e Semi-Infinito Plano da Esquerda (<code>20fco</code>)</div>
             <span class="formula-ref"><button class="code-pill" data-code="10.39">[10.39]</button></span>
           </div>
-          <p style="margin:0 0 0.65rem;"><strong>Por que fechamos o polígono passando por $(0;0)$?</strong> Os pontos $I_0 \to I_{22{,}5} \to I_{45} \to I_{67{,}5} \to I_{90}$ formam a fronteira do 1º quadrante resistente no plano $(M_{Rd,x}, M_{Rd,y})$. Para aplicar o <strong>Semi-Infinito Plano da Esquerda em 2D</strong> (que exige um polígono fechado), ligamos $I_{90}$ até a origem $(0;0)$ — fechando a aresta vertical sobre o eixo $M_{Rd,y}$ — e verificamos se $P_s = (-4250{,}0;\; +2550{,}0)$ termina com <code>Rp = Verdadeira</code>:</p>
+          <p style="margin:0 0 0.65rem;"><strong>Por que fechamos o polígono em $(0{,}0;\, 0{,}0)$?</strong> Os pontos $I_0 \to I_{22{,}5} \to I_{45} \to I_{67{,}5} \to I_{90}$ desenham a fronteira segura do 1º quadrante para $N_{sd} = -850\text{ kN}$. Para usar o método do <strong>Semi-Infinito Plano da Esquerda em 2D</strong> (mesma lógica da FCN, agora com $M_{sd,x} = -4250{,}0$ na horizontal e $M_{sd,y} = +2550{,}0$ na vertical), fechamos o polígono ligando $I_{90}$ à origem $(0;0)$.<br>
+          • Na aresta <code>I₂₂,₅ → I₄₅</code>, $M_{sd,y} = 2550$ está entre $1226{,}81$ e $2701{,}65$ ($A_{Nsd} = \text{Verdadeira}$), mas na reta $M_{x,\lim} = -8452{,}48$, e $M_{sd,x} = -4250 &gt; -8452{,}48$ (está à <em>direita</em> da borda externa, portanto $SI_p = \text{Falsa}$, e <code>Rp</code> continua Falsa).<br>
+          • Na última aresta <code>I₉₀ → (0;0)</code>, $M_{sd,y} = 2550$ está entre $6512{,}93$ e $0$ ($A_{Nsd} = \text{Verdadeira}$) e $M_{x,\lim} = 0{,}0$, logo $-4250 &lt; 0{,}0 \implies SI_p = \text{Verdadeira}$! Como ambas são verdadeiras, <code>Rp</code> vira <strong>Verdadeira</strong> (ponto dentro da região segura!):</p>
 
           <div class="combo-controls" id="fcoEdgeBtns">
             <button class="combo-btn active" data-edge="-1">Plano de Nsd Completo</button>
