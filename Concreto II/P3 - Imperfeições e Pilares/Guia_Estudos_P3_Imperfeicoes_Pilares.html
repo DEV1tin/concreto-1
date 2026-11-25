@@ -1406,6 +1406,18 @@
       </div>
 
       <div class="topic-body">
+        <!-- Conceito FCN -->
+        <div class="callout callout-info" style="margin-bottom:1.1rem;">
+          <strong>🧠 Conceito Fundamental — Por que na FCN não achamos $x$ direto como em vigas?</strong><br>
+          Em uma <strong>viga</strong> (flexão simples), $N_{sd} = 0$, então existe apenas uma incógnita ($x$) e uma equação de equilíbrio ($\sum F = 0$). Já em um <strong>pilar</strong>, atuam juntos um esforço normal $N_{sd}$ e um momento $M_{sd}$, e <strong>a posição da linha neutra e a resistência dependem uma da outra</strong>. Em vez de resolver um sistema não-linear por tentativas, a apostila adota a estratégia inversa: <strong>varremos todas as posições-chave da linha neutra</strong> (os 7 limites entre os domínios de ruptura) para construir o <strong>Polígono de Segurança</strong> $(N_{Rd}, M_{Rd,t})$. Se o ponto de solicitação $(N_{sd}, M_{sd,t})$ cair dentro desse polígono, o pilar resiste!
+          <div style="margin-top:0.55rem; font-size:0.84rem; display:grid; grid-template-columns:repeat(auto-fit, minmax(210px, 1fr)); gap:0.45rem;">
+            <div style="background:rgba(255,255,255,0.75); padding:0.45rem 0.6rem; border-radius:7px; border:1px solid #bfdbfe;"><strong>Reta a &amp; Dom. 1:</strong> Tração pura/excêntrica. O concreto está todo tracionado (desprezado, $N_{Rd,c}=0$) e só o aço trabalha.</div>
+            <div style="background:rgba(255,255,255,0.75); padding:0.45rem 0.6rem; border-radius:7px; border:1px solid #bfdbfe;"><strong>Dom. 2 &amp; 3:</strong> Ruptura dúctil. Aço tracionado escoa ($\ge \varepsilon_{yd}$); em 3–4 o concreto atinge $-3{,}5\text{‰}$ junto ao escoamento do aço (máximo $M_{Rd}$!).</div>
+            <div style="background:rgba(255,255,255,0.75); padding:0.45rem 0.6rem; border-radius:7px; border:1px solid #bfdbfe;"><strong>Dom. 4 &amp; 4a:</strong> Concreto esmaga ($-3{,}5\text{‰}$) antes do aço tracionado escoar. Em 4a–5 a LN sai da seção ($x = h_n$).</div>
+            <div style="background:rgba(255,255,255,0.75); padding:0.45rem 0.6rem; border-radius:7px; border:1px solid #bfdbfe;"><strong>Dom. 5 &amp; Reta b:</strong> Toda a seção comprimida sem tração. Na Reta b (compressão uniforme), a deformação cai para $-\varepsilon_{c2} = -2{,}0\text{‰}$.</div>
+          </div>
+        </div>
+
         <!-- Roteiro Geral FCN -->
         <div class="roteiro-box">
           <h3>🧭 Roteiro Passo a Passo FCN (Fluxograma E.1 da Apostila, p. 219)</h3>
@@ -1510,10 +1522,11 @@
         <!-- Passo 1 -->
         <div class="step-card">
           <div class="step-header">
-            <div class="step-title"><span class="step-num">1</span> Dados Preliminares e Constantes da Seção (<code>1fcn–3fcn</code>)</div>
+            <div class="step-title"><span class="step-num">1</span> Dados Preliminares, Convenção de Sinais e Constantes da Seção (<code>1fcn–3fcn</code>)</div>
             <span class="formula-ref"><button class="code-pill" data-code="10.21">[10.21]</button></span>
           </div>
-          <div class="grid-2" style="margin-bottom:0;">
+          <p style="margin:0 0 0.5rem; font-size:0.88rem; color:#334155;"><strong>Por que fazemos esta etapa?</strong> Precisamos transformar as resistências características ($f_{ck}, f_{yk}$) em valores de cálculo ($f_{cd}, f_{yd}$) e definir a tensão constante do bloco retangular do concreto ($\sigma_c$). Note que usamos $\eta_c = 0{,}9\alpha_c = 0{,}765$ (e não $0{,}85$) conforme a Seção 10.7.2 da apostila, um fator redutor de $10\%$ a favor da segurança adotado em pilares.</p>
+          <div class="grid-2" style="margin-bottom:0.5rem;">
             <div>
               <p style="margin:0 0 0.4rem;"><strong>Concreto C50 (Grupo I):</strong></p>
               <div class="formula-row">
@@ -1523,7 +1536,7 @@
               </div>
             </div>
             <div>
-              <p style="margin:0 0 0.4rem;"><strong>Aço CA-50 ($4\phi 22{,}0\text{ mm}$):</strong></p>
+              <p style="margin:0 0 0.4rem;"><strong>Aço CA-50 ($4\phi 22{,}0\text{ mm}$) e Geometria Útil:</strong></p>
               <div class="formula-row">
                 <div class="formula-math">$$f_{yd} = \frac{50}{1{,}15} = 43{,}478\text{ kN/cm}^2 \quad \varepsilon_{yd} = \frac{43{,}478}{21000} = 2{,}070\text{‰}$$
                 $$A_s = 4\frac{\pi\cdot 2{,}2^2}{4} = 15{,}205\text{ cm}^2 \quad \left(\frac{A_s}{b_s} = 3{,}8013\text{ cm}^2/\text{barra}\right)$$
@@ -1531,6 +1544,7 @@
               </div>
             </div>
           </div>
+          <p style="margin:0; font-size:0.86rem; color:#1e293b;"><strong>Por que o momento solicitante é negativo ($M_{sd,t} = -47142{,}63\text{ kNcm}$)?</strong> Pela <em>regra da mão direita</em>: a carga de compressão $N_{sd} = -2576{,}1\text{ kN}$ (entrando na seção, direção $-z$) aplicada acima do centroide ($e_y = +18{,}3\text{ cm}$) tende a girar a seção no sentido negativo do eixo $x$ ($t$), comprimindo a borda superior ($+n$) e descomprimindo a borda inferior ($-n$). Como $d' = 6{,}1\text{ cm}$ é a distância do centro da barra à borda, sua distância ao centroide é $35{,}0 - 6{,}1 = 28{,}9\text{ cm}$ ($+28{,}9$ nas barras 3 e 4; $-28{,}9$ nas barras 1 e 2).</p>
         </div>
 
         <!-- Passo 2 -->
@@ -1539,7 +1553,8 @@
             <div class="step-title"><span class="step-num">2</span> Posições da Linha Neutra ($x$) e Bloco Comprimido ($y, A_{cc}, S_{ct}$) (<code>4fcn–6fcn</code>)</div>
             <span class="formula-ref"><button class="code-pill" data-code="4fcn">[4fcn]</button> <button class="code-pill" data-code="5fcn">[5fcn]</button> <button class="code-pill" data-code="6fcn">[6fcn]</button></span>
           </div>
-          <p style="margin:0 0 0.5rem;">Com $d = 63{,}9\text{ cm}$, $h_t = 35{,}0\text{ cm}$ e $h_n = 70{,}0\text{ cm}$, calculamos os 7 pontos de interface usando $y = \zeta_c x = 0{,}8 x$ (exceto na reta $b$, onde toda a seção está comprimida, logo $y = h_n = 70{,}0\text{ cm}$), $A_{cc} = h_t y$ e $S_{ct} = A_{cc}\frac{h_n - y}{2}$:</p>
+          <p style="margin:0 0 0.5rem;"><strong>Por que calculamos $y$, $A_{cc}$ e $S_{ct}$ primeiro?</strong> A linha neutra $x$ separa o que está comprimido do que está tracionado (e tem origem na borda mais comprimida superior, crescendo para baixo). Como o diagrama simplificado substitui a parábola do concreto por um retângulo de altura $y = \zeta_c x = 0{,}8 x$, a força do concreto será $N_{Rd,c} = \sigma_c A_{cc}$ e o momento dessa força em torno do centroide será $M_{Rd,tc} = \sigma_c S_{ct}$.<br>
+          <strong>De onde vem $S_{ct} = A_{cc}\frac{h_n - y}{2}$?</strong> O centroide do retângulo comprimido (de altura $y$) fica a $y/2$ da borda superior; como o centroide da seção fica a $h_n/2$ da borda superior, o braço de alavanca do concreto é exatamente $\frac{h_n}{2} - \frac{y}{2} = \frac{h_n - y}{2}$ (sempre positivo, e como $\sigma_c &lt; 0$, resulta $M_{Rd,tc} \le 0$).</p>
           <div class="table-wrap">
             <table>
               <thead>
@@ -1573,7 +1588,7 @@
             <div class="step-title"><span class="step-num">3</span> Deformações, Tensões nas Barras e Esforços Resistentes Totais (<code>7fcn–9fcn</code>)</div>
             <span class="formula-ref"><button class="code-pill" data-code="T10.1">[T10.1]</button> <button class="code-pill" data-code="10.22">[10.22]</button> <button class="code-pill" data-code="10.23">[10.23]</button> <button class="code-pill" data-code="10.29">[10.29]</button></span>
           </div>
-          <p style="margin:0 0 0.5rem;">Para cada linha neutra, obtemos $(\varepsilon_c, \varepsilon_s)$ na Tabela 10.1 e interpolamos nas barras superiores ($d_{3,4} = 6{,}1\text{ cm}$, $n_{3,4} = +28{,}9\text{ cm}$) e inferiores ($d_{1,2} = 63{,}9\text{ cm}$, $n_{1,2} = -28{,}9\text{ cm}$) via $\varepsilon_{si} = (\varepsilon_s - \varepsilon_c)\frac{d_i}{d} + \varepsilon_c$, convertendo para tensão $\sigma_{si} = 21\cdot \varepsilon_{si}\text{ [kN/cm}^2\text{]}$ limitada a $\pm 43{,}478\text{ kN/cm}^2$:</p>
+          <p style="margin:0 0 0.5rem;"><strong>Por que interpolamos as deformações?</strong> Pela hipótese de Bernoulli (<em>seções permanecem planas após a deformação</em>), a deformação varia linearmente da fibra superior ($\varepsilon_c$, na posição $0$) até a armadura inferior ($\varepsilon_s$, na posição $d$). Para cada ponto, pegamos $(\varepsilon_c, \varepsilon_s)$ na Tabela 10.1 e interpolamos nas barras superiores ($d_{3,4} = 6{,}1\text{ cm}$, $n_{3,4} = +28{,}9\text{ cm}$) e inferiores ($d_{1,2} = 63{,}9\text{ cm}$, $n_{1,2} = -28{,}9\text{ cm}$) via $\varepsilon_{si} = (\varepsilon_s - \varepsilon_c)\frac{d_i}{d} + \varepsilon_c$, convertendo para tensão $\sigma_{si} = 21\cdot \varepsilon_{si}\text{ [kN/cm}^2\text{]}$ limitada ao patamar de escoamento $\pm f_{yd} = \pm 43{,}478\text{ kN/cm}^2$:</p>
 
           <div class="grid-2" style="margin-bottom:0.75rem;">
             <div class="card-box">
@@ -1665,7 +1680,10 @@
             <div class="step-title"><span class="step-num">4</span> Polígono de Segurança e Método do Semi-Infinito Plano da Esquerda (<code>10fcn</code>)</div>
             <span class="formula-ref"><button class="code-pill" data-code="10fcn">[10fcn]</button></span>
           </div>
-          <p style="margin:0 0 0.65rem;">O ponto de solicitação é $P_s = (N_{sd};\, M_{sd,t}) = (-2576{,}1\text{ kN};\; -47142{,}63\text{ kNcm})$. Clique nas arestas abaixo para visualizar graficamente o <strong>semi-infinito plano da esquerda</strong> de cada domínio no sentido horário (de Reta $a$ até Reta $b$):</p>
+          <p style="margin:0 0 0.65rem;"><strong>Como funciona o Método do Semi-Infinito Plano da Esquerda?</strong> É um teste geométrico exato (baseado em contagem de cruzamentos / <em>ray casting</em>) para saber se o ponto $P_s = (-2576{,}1\text{ kN};\; -47142{,}63\text{ kNcm})$ está dentro ou fora do polígono fechado. Começamos assumindo que o ponto está <strong>FORA</strong> (<code>Rp = Falsa</code>). Percorremos as 6 arestas no sentido horário (de Reta $a$ até Reta $b$):
+          <br>• <strong>Teste 1 ($A_{Nsd}$):</strong> o momento solicitante $M_{sd}$ está entre $M_{Rd,i}$ e $M_{Rd,j}$? (Se não, o raio horizontal em $M_{sd}$ nem cruza essa aresta).
+          <br>• <strong>Teste 2 ($SI_p$):</strong> o esforço normal $N_{sd}$ está à <em>esquerda</em> ($N_{sd} &lt; N_{\text{lim}}$) do prolongamento da aresta?
+          <br>Sempre que <strong>ambos forem verdadeiros</strong>, o raio horizontal para a direita cruza a fronteira do polígono, então invertemos <code>Rp</code> (Falsa $\leftrightarrow$ Verdadeira). Se ao final das 6 arestas <code>Rp = Verdadeira</code>, o ponto está dentro e o pilar resiste!</p>
 
           <div class="combo-controls" id="edgeBtns">
             <button class="combo-btn active" data-edge="-1">Polígono Completo</button>
@@ -1735,6 +1753,17 @@
       </div>
 
       <div class="topic-body">
+        <!-- Conceito FCO -->
+        <div class="callout callout-info" style="margin-bottom:1.1rem;">
+          <strong>🧠 Conceito Fundamental — Por que na FCO a Linha Neutra inclina e precisamos rotacionar para $(t,n)$?</strong><br>
+          Quando a carga normal $N_{sd}$ atua com excentricidade simultânea em $x$ e $y$, surge um momento resultante inclinado $M_{sd} = \sqrt{M_{sd,x}^2 + M_{sd,y}^2}$. Em seções retangulares ou com armadura assimétrica em relação ao eixo do momento, <strong>o ângulo da linha neutra ($\alpha_{LN}$) NÃO coincide com o ângulo do momento solicitante ($\varphi_s$)</strong> — porque a zona comprimida de concreto muda de forma (vira um triângulo ou trapézio) e desloca o centro de compressão.
+          <div style="margin-top:0.55rem; font-size:0.84rem; display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:0.45rem;">
+            <div style="background:rgba(255,255,255,0.75); padding:0.45rem 0.6rem; border-radius:7px; border:1px solid #bfdbfe;"><strong>1. Por que girar para $(t,n)$?</strong> Ao alinhar o eixo $t$ com a linha neutra inclinada de $\alpha_{LN}$, a deformação volta a variar linearmente em apenas <em>uma</em> direção ($n$), igual à FCN!</div>
+            <div style="background:rgba(255,255,255,0.75); padding:0.45rem 0.6rem; border-radius:7px; border:1px solid #bfdbfe;"><strong>2. Por que usar o Teorema de Green?</strong> A área comprimida inclinada não é mais um retângulo $h_t \cdot y$. Green calcula $A_{cc}, S_{ct}, S_{cn}$ de qualquer triângulo/trapézio somando seus vértices no sentido anti-horário.</div>
+            <div style="background:rgba(255,255,255,0.75); padding:0.45rem 0.6rem; border-radius:7px; border:1px solid #bfdbfe;"><strong>3. Por que fatiar no Plano de $N_{sd}$?</strong> Variar $\alpha_{LN}$ ($0^\circ..90^\circ$) e $x$ gera um <em>poliedro 3D</em>. Cortando-o na altura exata $N_{Rd} = N_{sd}$, obtemos um polígono 2D em $(M_{Rd,x}, M_{Rd,y})$ fácil de verificar!</div>
+          </div>
+        </div>
+
         <!-- Roteiro Geral FCO -->
         <div class="roteiro-box">
           <h3>🧭 Roteiro Passo a Passo FCO (Fluxograma F.1 da Apostila, p. 220)</h3>
@@ -1908,7 +1937,7 @@
             <div class="step-title"><span class="step-num">2</span> Execução do Loop para $\alpha_{LN} = 45{,}0^\circ$ na Interface <code>3–4</code> (<code>6fco–17fco</code>)</div>
             <span class="formula-ref"><button class="code-pill" data-code="10.rot">[10.rot]</button> <button class="code-pill" data-code="10.24">[10.24]</button> <button class="code-pill" data-code="10.26">[10.26]</button> <button class="code-pill" data-code="10.31">[10.31]</button> <button class="code-pill" data-code="10.19">[10.19]</button></span>
           </div>
-          <p style="margin:0 0 0.55rem;">Na FCO, o mesmo algoritmo roda para cada ângulo $\alpha_{LN} \in \{0^\circ;\, 22{,}5^\circ;\, 45^\circ;\, 67{,}5^\circ;\, 90^\circ\}$. Abaixo detalhamos passo a passo o caso inclinado <strong>$\alpha_{LN} = 45{,}0^\circ$ na interface 3–4</strong>:</p>
+          <p style="margin:0 0 0.55rem;"><strong>Por que testamos vários ângulos $\alpha_{LN}$?</strong> Como não sabemos de antemão qual inclinação da linha neutra equilibra a seção, varremos o 1º quadrante em 5 ângulos: $\alpha_{LN} \in \{0^\circ;\, 22{,}5^\circ;\, 45^\circ;\, 67{,}5^\circ;\, 90^\circ\}$ (em seções duplamente simétricas, os outros 3 quadrantes são espelhos idênticos). Em $0^\circ$ e $90^\circ$, a linha neutra é paralela aos lados (caso particular de FCN); nos ângulos inclinados, surge momento resistente também em $n$ ($M_{Rd,n} \neq 0$). Abaixo detalhamos passo a passo o caso inclinado <strong>$\alpha_{LN} = 45{,}0^\circ$ na interface 3–4</strong>:</p>
 
           <div class="grid-2">
             <div class="card-box">
@@ -1983,7 +2012,8 @@
             <div class="step-title"><span class="step-num">3</span> Corte no Plano de $N_{sd} = -850{,}0\text{ kN}$ em Todos os 5 Ângulos (<code>18fco–19fco</code>)</div>
             <span class="formula-ref"><button class="code-pill" data-code="10.41">[10.41]</button></span>
           </div>
-          <p style="margin:0 0 0.5rem;">Inspecionando os pontos calculados para os 5 ângulos de linha neutra, verificamos que <strong>$N_{sd} = -850{,}0\text{ kN}$ está sempre no Domínio 4</strong> (entre as interfaces <code>3–4</code> e <code>4–4a</code>). Assim, basta interpolar linearmente entre esses dois pontos usando a Eq. <button class="code-pill" data-code="10.41">[10.41]</button>:</p>
+          <p style="margin:0 0 0.5rem;"><strong>Por que fazemos esse corte (Plano de $N_{sd}$)?</strong> Na etapa anterior calculamos pontos em 3D $(N_{Rd}; M_{Rd,x}; M_{Rd,y})$, mas cada ângulo $\alpha_{LN}$ gera valores diferentes de $N_{Rd}$ nas interfaces. Como a nossa carga aplicada é fixa ($N_{sd} = -850{,}0\text{ kN}$), precisamos descobrir quais pares $(M_{Rd,x}, M_{Rd,y})$ o pilar resiste <em>exatamente</em> nesse nível de compressão.<br>
+          Inspecionando os pontos calculados para os 5 ângulos, vemos que <strong>$N_{sd} = -850{,}0\text{ kN}$ está sempre no Domínio 4</strong> (entre as interfaces <code>3–4</code> e <code>4–4a</code>). Assim, basta interpolar linearmente entre esses dois pontos usando a Eq. <button class="code-pill" data-code="10.41">[10.41]</button>:</p>
           <div class="table-wrap" style="margin-bottom:0;">
             <table>
               <thead>
@@ -2012,7 +2042,7 @@
             <div class="step-title"><span class="step-num">4</span> Polígono no Plano de $N_{sd}$ e Semi-Infinito Plano da Esquerda (<code>20fco</code>)</div>
             <span class="formula-ref"><button class="code-pill" data-code="10.39">[10.39]</button></span>
           </div>
-          <p style="margin:0 0 0.65rem;">Fechamos o polígono no plano de $N_{sd}$ ligando $I_0 \to I_{22{,}5} \to I_{45} \to I_{67{,}5} \to I_{90} \to (0;0)$ no sentido horário e testamos o ponto $P_s = (M_{sd,x};\, M_{sd,y}) = (-4250{,}0;\; +2550{,}0)$:</p>
+          <p style="margin:0 0 0.65rem;"><strong>Por que fechamos o polígono passando por $(0;0)$?</strong> Os pontos $I_0 \to I_{22{,}5} \to I_{45} \to I_{67{,}5} \to I_{90}$ formam a fronteira do 1º quadrante resistente no plano $(M_{Rd,x}, M_{Rd,y})$. Para aplicar o <strong>Semi-Infinito Plano da Esquerda em 2D</strong> (que exige um polígono fechado), ligamos $I_{90}$ até a origem $(0;0)$ — fechando a aresta vertical sobre o eixo $M_{Rd,y}$ — e verificamos se $P_s = (-4250{,}0;\; +2550{,}0)$ termina com <code>Rp = Verdadeira</code>:</p>
 
           <div class="combo-controls" id="fcoEdgeBtns">
             <button class="combo-btn active" data-edge="-1">Plano de Nsd Completo</button>
